@@ -11,7 +11,7 @@ debug($codepropre->decode);
 /**
  * Classe Decode
  *
- * Classe qui permet d'analyser le code fourni par l'utilisateur et de detecter les erreurs de syntaxe
+ * Classe qui permet d'analyser le code fourni par l'utilisateur
  * @param Text brut des instructions entrées par l'utilisateur
  *
  **/
