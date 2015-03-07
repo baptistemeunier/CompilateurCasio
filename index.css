@@ -1,1 +1,9 @@
-
+body {
+	text-align: center;
+}
+section {
+	display: inline-block;
+	width: 800px;
+	background-color: green;
+	height: 1000px;
+}
