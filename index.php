@@ -6,7 +6,6 @@
 		<link rel="stylesheet" type="text/css" href="index.css" />
 		<link rel="stylesheet" type="text/css" href="nav.css" />
 		<script type="text/javascript" src="jquery-1.11.2.min.js"></script>
-		<script type="text/javascript" src="jquery-ui-1.11.2/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="index.js"></script>
 		<title>Casio</title>
 	</head>
