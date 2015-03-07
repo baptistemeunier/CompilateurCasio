@@ -5,5 +5,18 @@ section {
 	display: inline-block;
 	width: 800px;
 	background-color: green;
-	height: 1000px;
+	padding: 20px;
+}
+form {
+	text-align: left;
+	background-color: red;
+	padding: 20px;
+}
+.if, .then, .else {
+	border-left: yellow 5px solid;
+	padding: 5px; margin: 5px;
+}
+input {
+	display: block;
+	margin: 10px 0;
 }
