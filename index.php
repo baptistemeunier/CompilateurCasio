@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="nav.css" />
 		<script type="text/javascript" src="jquery-1.11.2.min.js"></script>
 		<script type="text/javascript" src="jquery-ui-1.11.2/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="index.js"></script>
 		<title>Casio</title>
 	</head>
 	<body id="body">
@@ -15,8 +16,7 @@
 		?>
 		<section>
 			<h1>Programme</h1>
-			<form method="post" action="#">
-				
+			<form method="post" action="#" id="programme">
 			</form>
 		</section>
 	</body>
