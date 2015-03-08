@@ -2,10 +2,11 @@
 require "fonctionsdev.php";
 
 
-$data = "[AFFICHER Entre A]-[LIRE A]-[AFFICHER Entre B]-[LIRE B]-[CALCUL C]A+B[/]-[AFFICHER C]";
-$codepropre = new Decode($data);
-$code = new Code($codepropre->decode);
-debug($code->code);
+$data = "[AFFICHER Entre A]-[LIRE A]-[AFFICHER Entre B]-[LIRE B]-[CALCUL C]A+B[/]-[AFFICHER C]"; // Code reçu par la formulaire
+$codepropre = new Decode($data);                             // Decode le code recu par le formulaire
+$code = new Code($codepropre->decode);                       // Formate le code en langage Casio
+debug($code->code);                                          // Affichage du code
+$run = new Run($codepropre->decode, $codepropre->var_used);  // Test de programme envoyé
 
 /**
  * Classe Decode
@@ -88,5 +89,41 @@ class Code{
 	
 	function calcul($params){
 		$this->code .= $params['var'].'->'.$params['param']."\n";
+	}
+}
+/**
+ * Classe Code
+ *
+ * Permet d'ecrire le code decodé en langage Casio
+ * @param Tableau des insctructions
+ * @param Tableau des variables
+ **/
+class Run{
+
+	private $vars = array();
+
+	function __construct($data, $vars){
+		foreach ($vars as $var)                                      // Pour chaque instruction
+			$this->vars[$var] = 0;                                   // On initialise
+		foreach ($data as $inctruction){                             // Pour chaque instruction
+			$this->$inctruction['fonction']($inctruction['params']); // Lancer la fonction qui traduit
+		}
+	}
+
+	function afficher($text){
+		if(strlen($text)==1){
+			echo $this->vars[$text]." <br />";
+		}else{
+			echo "$text <br />";
+		}
+	}
+
+	function lire($var){
+		echo "?->$var <br />";
+	}
+	
+	function calcul($params){
+		$this->vars[$params['var']] = $params['param'];
+		echo $this->vars[$params['var']]."<br />";
 	}
 }
