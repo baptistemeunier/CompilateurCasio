@@ -1,8 +1,8 @@
 <?php
 require "fonctionsdev.php";
 
-
-$data = "[AFFICHER Entre A]-[LIRE A]-[AFFICHER Entre B]-[LIRE B]-[CALCUL C]A+B[/]-[AFFICHER C]"; // Code reçu par la formulaire
+$data = "[AFFICHER Entre A]@[LIRE A]@[AFFICHER Entre B]@[LIRE B]@[CALCUL C]A+B+5[/]@[AFFICHER C]"; // Code reçu par la formulaire
+$data = "[CALCUL A]5[/]@[AFFICHER A =]@[AFFICHER A]";
 $codepropre = new Decode($data);                             // Decode le code recu par le formulaire
 $code = new Code($codepropre->decode);                       // Formate le code en langage Casio
 debug($code->code);                                          // Affichage du code
@@ -20,10 +20,10 @@ class Decode{
 	public $decode = array();   // Liste des instructions formatées
 
 	function __construct($data){
-		$inctructions = explode("-", $data);      // On recupere les instuctions une par une
+		$inctructions = explode("@", $data);      // On recupere les instuctions une par une
 		foreach ($inctructions as $inctruction) { // Pour chaque instruction
 			
-			if(preg_match("~^\[([A-Z]+) ([A-Za-z0-9 ]+)\]$~", $inctruction, $find)){         // Instruction simple style ([LIRE A])
+			if(preg_match("~^\[([A-Z]+) ([^\]]+)\]$~", $inctruction, $find)){         // Instruction simple style ([LIRE A])
 				$this->varAdd($find[2]);                                                     // Ajouts à la liste des variables
 				$this->inctruction($find[1], $find[2]);                                      // Ajouts de l'instructions
 			}else if(preg_match("~^\[(.+) ([A-Z])\](.+)\[/\]$~", $inctruction, $find)){      // Instruction complexe style ([CALCUL C]A+B[/])
@@ -132,4 +132,3 @@ class Run{
 		$this->vars[$params['var']] = $params['param'];
 	}
 }
-
