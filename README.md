@@ -1,5 +1,5 @@
 # CompilateurCasio
-Projet ISN
+Projet ISN de terminale qui à pour but de permettre à un utillisateur (experimenter ou non) de traduire un métalangage en langage casio, de tester son programme et de l'exporter (Format txt pour le moment)
 
 
 # Cahiers des charges
