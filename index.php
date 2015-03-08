@@ -16,6 +16,7 @@
 		<section>
 			<h1>Programme</h1>
 			<form method="post" action="#" id="programme">
+				<button class="plus">+</button>
 			</form>
 		</section>
 	</body>
