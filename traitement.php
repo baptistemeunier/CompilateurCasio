@@ -123,7 +123,13 @@ class Run{
 	}
 	
 	function calcul($params){
+		for ($i=0; $i < strlen($params['param']); $i++) {
+			$caractere = $params['param'][$i];
+			if(preg_match("#[A-Z]#", $caractere)){
+				$params['param'][$i] = $this->vars[$caractere];
+			}
+		}
 		$this->vars[$params['var']] = $params['param'];
-		echo $this->vars[$params['var']]."<br />";
 	}
 }
+
