@@ -10,7 +10,8 @@ class Config{
 						 'dbname' => 'isn',
 						 'user' => 'root',
 						 'password' => '');
-
+	public static $fonctions_supportees = array('calcul', 'lire', 'afficher');
+	
 	static function sql_connect(){
 		try {
 		     $db = new PDO('mysql:dbname='.self::$sql['dbname'].';host='.self::$sql['host'], self::$sql['user'], self::$sql['password']);

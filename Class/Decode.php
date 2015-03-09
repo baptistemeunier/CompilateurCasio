@@ -9,17 +9,18 @@ class Decode{
 
 	public $var_used = array(); // Liste des variables utilisées
 	public $decode = array();   // Liste des instructions formatées
+	public $erreur = array();   // Liste des erreurs
 
 	function __construct($data){
 		$inctructions = explode("#", $data);      // On recupere les instuctions une par une (Qui sont sepater par un diese)
 		foreach ($inctructions as $inctruction) { // Pour chaque instruction
 			
 			if(preg_match("~^CALCUL ([A-Z])=(.+)$~", $inctruction, $find)){ 
-				$this->varAdd($find[1]);                                                      // Ajouts à la liste des variables
-				$this->inctruction("calcul", array('var' => $find[1], 'calcul' => $find[2])); // Ajouts de l'instructions
-			}else if(preg_match("~^([A-Z]+) (.+)$~", $inctruction, $find)){ 
-				$this->varAdd($find[2]);                                                     // Ajouts à la liste des variables
-				$this->inctruction($find[1], $find[2]);                                      // Ajouts de l'instructions
+				$this->varAdd($find[1]);                                                                  // Ajouts à la liste des variables
+				$this->inctruction("calcul", array('var' => trim($find[1]), 'calcul' => trim($find[2]))); // Ajouts de l'instructions
+			}else if(preg_match("~^([A-Za-z]+) (.+)$~", $inctruction, $find)){ 
+				$this->varAdd($find[2]);                             // Ajouts à la liste des variables
+				$this->inctruction(trim($find[1]), trim($find[2]));  // Ajouts de l'instructions
 			}else{
 				debug($inctruction);
 			}
@@ -33,6 +34,7 @@ class Decode{
 	 * @return Boolean variable ajoutée ou non
 	 **/
 	private function varAdd($var){
+		$var = trim($var);
 		if(strlen($var)==1 && !in_array($var, $this->var_used)){ // Si la variable n'est pas dejà dans le tableau
 			$this->var_used[] = $var;
 			return true;
@@ -46,8 +48,13 @@ class Decode{
 	 * @param La fonction à ajouté et les parametres
 	 **/
 	private function inctruction($fonction, $param){
-		$this->decode[] = array('fonction' => strtolower($fonction),
-								'params' => $param);
+		$fonction = strtolower($fonction);
+		if(in_array($fonction, Config::$fonctions_supportees)){
+			$this->decode[] = array('fonction' => $fonction,
+									'params' => $param);	
+		}else{
+			$this->erreur[] = 'ERROR#Fonction '.$fonction.' inconnu';
+		}
 	}
 }
 
