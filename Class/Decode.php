@@ -1,3 +1,4 @@
+<?php
 /**
  * Classe Decode
  *
@@ -49,3 +50,5 @@ class Decode{
 								'params' => $param);
 	}
 }
+
+?>

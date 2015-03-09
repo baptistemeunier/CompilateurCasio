@@ -1,3 +1,4 @@
+<?php
 /**
  * Classe Run
  *
@@ -39,3 +40,4 @@ class Run{
 		$this->vars[$params['var']] = $params['param'];
 	}
 }
+?>

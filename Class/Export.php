@@ -1,3 +1,4 @@
+<?php
 /**
 * Classe Export
 *
@@ -8,3 +9,4 @@
 Class Export{
 
 }
+?>

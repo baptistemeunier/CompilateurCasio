@@ -1,3 +1,4 @@
+<?php
 /**
  * Classe Code
  *
@@ -30,3 +31,5 @@ class Code{
 		$this->code .= $params['var'].'->'.$params['param']."\n";
 	}
 }
+
+?>
