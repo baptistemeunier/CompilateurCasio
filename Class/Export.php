@@ -32,7 +32,7 @@ Class Export{
 	}
 	function savetxt($code, $time){
 		// 1 : on ouvre le fichier
-		$fichier = fopen($time.'.txt', 'a+');
+		$fichier = fopen("save_code/".$time.'.txt', 'a+');
 		fwrite($fichier, $code);
 		debug($fichier);
 		// 2 : on fera ici nos opérations sur le fichier...
