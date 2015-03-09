@@ -1,0 +1,22 @@
+body {
+	text-align: center;
+}
+section {
+	display: inline-block;
+	width: 800px;
+	background-color: green;
+	padding: 20px;
+}
+form {
+	text-align: left;
+	background-color: red;
+	padding: 20px;
+}
+div {
+	border-left: black 5px solid;
+	padding: 0 10px; margin: 5px;
+}
+input {
+	display: block;
+	margin: 10px 0;
+}

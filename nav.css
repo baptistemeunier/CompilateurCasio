@@ -1,0 +1,11 @@
+nav {
+	position: fixed;
+	left: 0; top: 0;
+	width: 200px;
+	height: 100%;
+	background-color: orange;
+}
+nav button {
+	width: 80%;
+	margin: 10px 0;
+}
