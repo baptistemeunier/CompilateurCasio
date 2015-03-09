@@ -18,5 +18,5 @@ Métalangage linaire
  * Proposer une documetation simple avec la liste des fonctions implantées.
 
 Sauvergarde et exportation
- * Premettre à une saugarde des codes de l'utisateur.
+ * Premettre à une saugarde des codes de l'utisateur (BDD).
  * Premettre une exportation (au format TXT ?).
