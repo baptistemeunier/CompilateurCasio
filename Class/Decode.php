@@ -10,7 +10,7 @@ class Decode{
 	public $decode = array();   // Liste des instructions formatées
 
 	function __construct($data){
-		$inctructions = explode("@", $data);      // On recupere les instuctions une par une
+		$inctructions = explode("#", $data);      // On recupere les instuctions une par une (Qui sont sepater par un diese)
 		foreach ($inctructions as $inctruction) { // Pour chaque instruction
 			
 			if(preg_match("~^\[([A-Z]+) ([^\]]+)\]$~", $inctruction, $find)){         // Instruction simple style ([LIRE A])
