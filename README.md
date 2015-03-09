@@ -16,3 +16,7 @@ Métalangage linaire
  * Etre linéaire (textarea ?).
  * Etre proche des langages existants (Style : Java, C).
  * Proposer une documetation simple avec la liste des fonctions implantées.
+
+Sauvergarde et exportation
+ * Premettre à une saugarde des codes de l'utisateur.
+ * Premettre une exportation (au format TXT ?).
