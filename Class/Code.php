@@ -17,9 +17,9 @@ class Code{
 
 	function afficher($text){
 		if(strlen($text)==1){
-			$this->code .= $text."/|\n";
+			$this->code .= $text."/\n";
 		}else{
-			$this->code .= "$text\n";
+			$this->code .= "\"$text\"\n";
 		}
 	}
 
@@ -28,7 +28,7 @@ class Code{
 	}
 	
 	function calcul($params){
-		$this->code .= $params['var'].'->'.$params['param']."\n";
+		$this->code .= $params['param'].'->'.$params['var']."\n";
 	}
 }
 
