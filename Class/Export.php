@@ -9,8 +9,9 @@
 Class Export{
 
 	function __construct($code_recu, $code_casio){
-		//$this->savedb($code_recu);
-		//$this->savetxt($code_recu);
+		$time = time(); 
+		//$this->savedb($code_recu, $time);
+		$this->savetxt($code_casio, $time);
 	}
 
 	function savedb($code){
@@ -25,9 +26,19 @@ Class Export{
 		$req = $db->prepare("INSERT INTO programmes(user_id, time, programme) VALUES(:user_id, :time, :programme)");
 		$req->execute(array(
 			'user_id' => 1,
-			'time' => time(),
+			'time' => $time,
 			'programme' => $code
 		));
+	}
+	function savetxt($code, $time){
+		// 1 : on ouvre le fichier
+		$fichier = fopen($time.'.txt', 'a+');
+		fwrite($fichier, $code);
+		debug($fichier);
+		// 2 : on fera ici nos opérations sur le fichier...
+
+		// 3 : quand on a fini de l'utiliser, on ferme le fichier
+		fclose($fichier);
 	}
 }
 ?>
