@@ -14,4 +14,5 @@ $codepropre = new Decode($data);                             // Decode le code r
 $code       = new Code($codepropre->decode);                       // Formate le code en langage Casio
 debug($code->code);                                          // Affichage du code
 $run        = new Run($codepropre->decode, $codepropre->var_used);  // Test de programme envoyé
+$save       = new Export($data , $code->code);  // Test de programme envoyé
 
