@@ -28,7 +28,7 @@ class Code{
 	}
 	
 	function calcul($params){
-		$this->code .= $params['param'].'->'.$params['var']."\n";
+		$this->code .= $params['calcul'].'->'.$params['var']."\n";
 	}
 }
 

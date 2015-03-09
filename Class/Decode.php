@@ -11,15 +11,15 @@ class Decode{
 	public $decode = array();   // Liste des instructions formatées
 
 	function __construct($data){
-		$inctructions = explode("@", $data);      // On recupere les instuctions une par une (Qui sont sepater par un diese)
+		$inctructions = explode("#", $data);      // On recupere les instuctions une par une (Qui sont sepater par un diese)
 		foreach ($inctructions as $inctruction) { // Pour chaque instruction
 			
-			if(preg_match("~^\[([A-Z]+) ([^\]]+)\]$~", $inctruction, $find)){         // Instruction simple style ([LIRE A])
+			if(preg_match("~^CALCUL ([A-Z])=(.+)$~", $inctruction, $find)){ 
+				$this->varAdd($find[1]);                                                      // Ajouts à la liste des variables
+				$this->inctruction("calcul", array('var' => $find[1], 'calcul' => $find[2])); // Ajouts de l'instructions
+			}else if(preg_match("~^([A-Z]+) (.+)$~", $inctruction, $find)){ 
 				$this->varAdd($find[2]);                                                     // Ajouts à la liste des variables
 				$this->inctruction($find[1], $find[2]);                                      // Ajouts de l'instructions
-			}else if(preg_match("~^\[(.+) ([A-Z])\](.+)\[/\]$~", $inctruction, $find)){      // Instruction complexe style ([CALCUL C]A+B[/])
-				$this->varAdd($find[2]);                                                     // Ajouts à la liste des variables
-				$this->inctruction($find[1], array('var' => $find[2], 'param' => $find[3])); // Ajouts de l'instructions
 			}else{
 				debug($inctruction);
 			}
