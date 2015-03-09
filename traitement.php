@@ -5,6 +5,7 @@ require "fonctionsdev.php";
 require "Class/Decode.php";
 require "Class/Code.php";
 require "Class/Run.php";
+require "Class/Export.php";
 
 $data = "[AFFICHER Entre A]@[LIRE A]@[AFFICHER Entre B]@[LIRE B]@[CALCUL C]A+B+5[/]@[AFFICHER C]"; // Code reçu par la formulaire
 $data = "[CALCUL A]5[/]@[AFFICHER A =]@[AFFICHER A]";
