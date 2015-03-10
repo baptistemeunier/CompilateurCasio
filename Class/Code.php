@@ -15,7 +15,8 @@ class Code{
 		}
 	}
 
-	function afficher($text){
+	function afficher($params){
+		$text = $params['text'];
 		if(strlen($text)==1){
 			$this->code .= $text."/\n";
 		}else{
@@ -23,7 +24,8 @@ class Code{
 		}
 	}
 
-	function lire($var){
+	function lire($params){
+		$var = $params['var'];
 		$this->code .= "?->$var\n";
 	}
 	
