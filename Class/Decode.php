@@ -10,19 +10,25 @@ class Decode{
 	public $var_used = array(); // Liste des variables utilisées
 	public $decode = array();   // Liste des instructions formatées
 	public $erreur = array();   // Liste des erreurs
+	private $fonction = array("~^CALCUL (.+)$~" => "calcul",
+							  "~^LIRE (.+)$~" => "lire",
+							  "~^AFFICHER (.+)$~" => "afficher"
+							  );   // Liste des fonction
 
 	function __construct($data){
 		$inctructions = explode("#", $data);      // On recupere les instuctions une par une (Qui sont sepater par un diese)
 		foreach ($inctructions as $inctruction) { // Pour chaque instruction
-			
-			if(preg_match("~^CALCUL ([A-Z])=(.+)$~", $inctruction, $find)){ 
-				$this->varAdd($find[1]);                                                                  // Ajouts à la liste des variables
-				$this->inctruction("calcul", array('var' => trim($find[1]), 'calcul' => trim($find[2]))); // Ajouts de l'instructions
-			}else if(preg_match("~^([A-Za-z]+) (.+)$~", $inctruction, $find)){ 
-				$this->varAdd($find[2]);                             // Ajouts à la liste des variables
-				$this->inctruction(trim($find[1]), trim($find[2]));  // Ajouts de l'instructions
-			}else{
-				debug($inctruction);
+			$find = false;
+			foreach ($this->fonction as $match => $fonction) {
+				if(preg_match($match, $inctruction, $find)){
+					$this->$fonction($find[1]); // Ajouts de l'instructions
+					$find = true;
+					break;
+				}
+			}
+			if($find == false){
+				$this->erreur[] = 'ERROR#Fonction '.$fonction.' inconnu';
+				break;
 			}
 		}
 	}
@@ -47,14 +53,20 @@ class Decode{
 	 * Ajoute l'inctruction à la liste des insctructions
 	 * @param La fonction à ajouté et les parametres
 	 **/
-	private function inctruction($fonction, $param){
-		$fonction = strtolower($fonction);
-		if(in_array($fonction, Config::$fonctions_supportees)){
-			$this->decode[] = array('fonction' => $fonction,
-									'params' => $param);	
-		}else{
-			$this->erreur[] = 'ERROR#Fonction '.$fonction.' inconnu';
-		}
+	private function afficher($text){
+			$this->decode[] = array('fonction' => 'afficher',
+									'params' => array('text' => $text));
+	}
+	
+	private function lire($var){
+			$this->decode[] = array('fonction' => 'lire',
+									'params' => array('var' => $var));
+	}
+	
+	private function calcul($params){
+			$params = explode("=", $params);
+			$this->decode[] = array('fonction' => 'calcul',
+									'params' => array('var' => $params[0], 'calcul' => $params[1]));
 	}
 }
 
