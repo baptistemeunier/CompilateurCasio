@@ -8,13 +8,10 @@
  **/
 class Run{
 
-	private $vars = array();
-
-	function __construct($data, $vars){
-		foreach ($vars as $var)                                      // Pour chaque instruction
-			$this->vars[$var] = 0;                                   // On initialise
+	function __construct($data, $vars){                                 // On initialise
 		foreach ($data as $inctruction){                             // Pour chaque instruction
-			$this->$inctruction['fonction']($inctruction['params']); // Lancer la fonction qui traduit
+			debug($inctruction);
+			//$this->$inctruction['fonction']($inctruction['params']); // Lancer la fonction qui traduit
 		}
 	}
 

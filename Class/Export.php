@@ -23,6 +23,7 @@ Class Export{
 			'programme' => $code
 		));
 	}
+	
 	function savetxt($code, $time){
 		$fichier = fopen("save_code/".$time.'.txt', 'a+');
 		fwrite($fichier, $code);

@@ -13,8 +13,8 @@ $data       = "AFFICHER Resolution d'equation dans R#AFFICHER Ax^2+Bx+c#AFFICHER
 $codepropre = new Decode($data); // Decode le code recu par le formulaire
 if(empty($codepropre->erreur)){  // Si aucune erreur
 	$code = new Code($codepropre->decode);   // Formate le code en langage Casio
-	debug($code->code);  // Affichage du code
-	//$run        = new Run($codepropre->decode, $codepropre->var_used);  // Test de pro envoyé
+	//debug($code->code);  // Affichage du code
+	$run        = new Run($codepropre->decode, $codepropre->var_used);  // Test de pro envoyé
 	$save = new Export($data , $code->code); // Sauvegarde (bdd et txt)
 }else{
 	debug($codepropre->erreur); // Affichage des erreurs
