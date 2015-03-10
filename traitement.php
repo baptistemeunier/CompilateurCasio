@@ -9,7 +9,7 @@ require "Class/Run.php";
 require "Class/Export.php";
 
 //SI D<0][AFFICHER Aucune solution][/]@
-$data       = "AFFICHER Resolution d'equation dans R#AFFICHER Ax^2+Bx+c#AFFICHER Saisir A#LIRE A#AFFICHER Saisir B#LIRE B#AFFICHER Saisir C#LIRE C#CALCUL D=B^2-4*A*C#AFFICHER Delta =#AFFICHER D";
+$data       = "AFFICHER Resolution d'equation dans R#AFFICHER Ax^2+Bx+c#AFFICHER Saisir A#LIRE A#AFFICHER Saisir B#LIRE B#AFFICHER Saisir C#LIRE C#CALCUL D=B^2-4*A*C#CLRTXT#STOP#AFFICHER Delta =#AFFICHER D";
 $codepropre = new Decode($data); // Decode le code recu par le formulaire
 if(empty($codepropre->erreur)){  // Si aucune erreur
 	$code = new Code($codepropre->decode);   // Formate le code en langage Casio
@@ -18,4 +18,5 @@ if(empty($codepropre->erreur)){  // Si aucune erreur
 	$save = new Export($data , $code->code); // Sauvegarde (bdd et txt)
 }else{
 	debug($codepropre->erreur); // Affichage des erreurs
+	debug($codepropre->decode);
 }

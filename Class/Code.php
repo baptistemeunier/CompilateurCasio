@@ -15,6 +15,10 @@ class Code{
 		}
 	}
 
+	function instruction($params){
+		$this->code .= $params."\n";
+	}
+	
 	function afficher($params){
 		$text = $params['text'];
 		if(strlen($text)==1){

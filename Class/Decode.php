@@ -10,24 +10,34 @@ class Decode{
 	public $var_used = array(); // Liste des variables utilisées
 	public $decode = array();   // Liste des instructions formatées
 	public $erreur = array();   // Liste des erreurs
-	private $fonction = array("~^CALCUL (.+)$~" => "calcul",
-							  "~^LIRE (.+)$~" => "lire",
-							  "~^AFFICHER (.+)$~" => "afficher"
-							  );   // Liste des fonction
+	private $fonction_match  = array("~^CALCUL (.+)$~" => "calcul",
+							   		 "~^LIRE (.+)$~" => "lire",
+							   		 "~^AFFICHER (.+)$~" => "afficher"
+							   );   // Liste des fonction
+	private $fonction_simple = array("STOP", "CLRTXT");
 
 	function __construct($data){
 		$inctructions = explode("#", $data);      // On recupere les instuctions une par une (Qui sont sepater par un diese)
-		foreach ($inctructions as $inctruction) { // Pour chaque instruction
+		foreach ($inctructions as $instruction) { // Pour chaque instruction
 			$find = false;
-			foreach ($this->fonction as $match => $fonction) {
-				if(preg_match($match, $inctruction, $find)){
-					$this->$fonction($find[1]); // Ajouts de l'instructions
+			foreach ($this->fonction_simple as $fonction) {
+				if($instruction == $fonction){
+					$this->instruction($fonction); // Ajouts de l'instructions
 					$find = true;
 					break;
 				}
 			}
 			if($find == false){
-				$this->erreur[] = 'ERROR#Fonction '.$fonction.' inconnu';
+				foreach ($this->fonction_match as $match => $fonction) {
+					if(preg_match($match, $instruction, $find)){
+						$this->$fonction($find[1]); // Ajouts de l'instructions
+						$find = true;
+						break;
+					}
+				}
+			}
+			if($find == false){
+				$this->erreur[] = 'ERROR#Fonction '.$instruction.' inconnu';
 				break;
 			}
 		}
@@ -48,11 +58,16 @@ class Decode{
 		return false;
 	}
 	/**
-	 * Function inctruction
+	 * Function instruction
 	 *
-	 * Ajoute l'inctruction à la liste des insctructions
+	 * Ajoute l'instruction à la liste des insctructions
 	 * @param La fonction à ajouté et les parametres
 	 **/
+	private function instruction($params){
+			$this->decode[] = array('fonction' => 'instruction',
+									'params' => ucfirst(strtolower($params)));
+	}
+
 	private function afficher($text){
 			$this->decode[] = array('fonction' => 'afficher',
 									'params' => array('text' => $text));
