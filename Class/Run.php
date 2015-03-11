@@ -8,18 +8,26 @@
  **/
 class Run{
 
+	public $js = "";
+
 	function __construct($data, $vars){                                 // On initialise
+		$this->js = "$(init);
+		/* Fonction d'initialisation */
+		function init(){";
 		foreach ($data as $inctruction){                             // Pour chaque instruction
-			debug($inctruction);
-			//$this->$inctruction['fonction']($inctruction['params']); // Lancer la fonction qui traduit
+			if($inctruction['fonction']==="afficher"){  // Juste pour les test
+				$this->$inctruction['fonction']($inctruction['params']); // Lancer la fonction qui traduit
+			}
 		}
+		$this->js .= "}";
 	}
 
-	function afficher($text){
+	function afficher($params){
+		$text = $params['text'];
 		if(strlen($text)==1){
-			echo $this->vars[$text]." <br />";
+		//	echo $this->vars[$text]." <br />";
 		}else{
-			echo "$text <br />";
+			$this->js .= "$(\"#console p\").append(\"$text<br />\");";
 		}
 	}
 
