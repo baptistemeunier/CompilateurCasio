@@ -12,33 +12,25 @@ class Decode{
 	public $erreur = array();   // Liste des erreurs
 	private $fonction_match  = array("~^CALCUL (.+)$~" => "calcul",
 							   		 "~^LIRE (.+)$~" => "lire",
-							   		 "~^AFFICHER (.+)$~" => "afficher"
+							   		 "~^AFFICHER (.+)$~" => "afficher",
+							   		 "~^SET (.+)$~" => "set"
 							   );   // Liste des fonction
-	private $fonction_simple = array("STOP", "CLRTXT");
+	private $fonction_simple = array("STOP", "CLRTXT"); // Liste des instructions
 
 	function __construct($data){
 		$inctructions = explode("#", $data);      // On recupere les instuctions une par une (Qui sont sepater par un diese)
 		foreach ($inctructions as $instruction) { // Pour chaque instruction
-			$find = false;
-			foreach ($this->fonction_simple as $fonction) {
+			foreach ($this->fonction_simple as $fonction) { // Si c'est une instruction simple
 				if($instruction == $fonction){
 					$this->instruction($fonction); // Ajouts de l'instructions
-					$find = true;
 					break;
 				}
 			}
-			if($find == false){
-				foreach ($this->fonction_match as $match => $fonction) {
-					if(preg_match($match, $instruction, $find)){
-						$this->$fonction($find[1]); // Ajouts de l'instructions
-						$find = true;
-						break;
-					}
+			foreach ($this->fonction_match as $match => $fonction) { // Si c'est une fonction complexe
+				if(preg_match($match, $instruction, $find)){
+					$this->$fonction($find[1]); // Ajouts de l'instructions
+					break;
 				}
-			}
-			if($find == false){
-				$this->erreur[] = 'ERROR#Fonction '.$instruction.' inconnu';
-				break;
 			}
 		}
 	}
@@ -82,6 +74,21 @@ class Decode{
 			$params = explode("=", $params);
 			$this->decode[] = array('fonction' => 'calcul',
 									'params' => array('var' => $params[0], 'calcul' => $params[1]));
+	}
+
+	private function set($set){
+		$set = ucfirst(strtolower($set));
+		$liste_set = array('Deg', 'Rad', 'Gra');
+		if(in_array($set, $liste_set)){
+			$this->decode[] = array('fonction' => 'set',
+									'params' => array('set' => $set));
+		}else{
+			$this->erreur[] = 'WARNING#Parametre '.$set.' inconnu';
+		}	
+	}
+
+	private function error(){
+		debug($this->erreur);
 	}
 }
 

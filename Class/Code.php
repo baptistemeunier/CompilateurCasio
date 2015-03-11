@@ -36,6 +36,10 @@ class Code{
 	function calcul($params){
 		$this->code .= $params['calcul'].'->'.$params['var']."\n";
 	}
+	
+	function set($params){
+		$this->code .= $params['set']."\n";
+	}
 }
 
 ?>
