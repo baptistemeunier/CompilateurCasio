@@ -20,11 +20,10 @@ class Code{
 	}
 	
 	function afficher($params){
-		$text = $params['text'];
-		if(strlen($text)==1){
-			$this->code .= $text."/\n";
+		if(isset($params['var'])==1){
+			$this->code .= $params['var']."/\n";
 		}else{
-			$this->code .= "\"$text\"\n";
+			$this->code .= "\"".$params['text']."\"\n";
 		}
 	}
 
