@@ -9,8 +9,8 @@ require "Class/Run.php";
 require "Class/Export.php";
 
 
-//$data       = "AFFICHER Resolution d'equation dans R#AFFICHER Ax^2+Bx+c#AFFICHER Saisir A#LIRE A#AFFICHER Saisir B#LIRE B#AFFICHER Saisir C#LIRE C#CALCUL D=B^2-4*A*C#CLRTXT#STOP#AFFICHER Delta =#AFFICHER D";
-$data = "SET deg#CLRTXT"; // Data de test
+$data = "AFFICHER Test calcul C=A*B#AFFICHER Saisir A#LIRE A#AFFICHER Saisir B#LIRE B#CALCUL C=A*B#AFFICHER C =#AFFICHER C";
+$data = "AFFICHER C=A/B#AFFICHER Saisir A#LIRE A#AFFICHER Saisir B#LIRE B#CALCUL C=A/B#AFFICHER C =#AFFICHER C";
 if(isset($_POST['data'])){ // Si une données est envoyée
 	$data = $_POST['data'];
 }
