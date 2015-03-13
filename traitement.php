@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html>
 <?php
 /* Appel des fonction de developement */
 require "fonctionsdev.php";
@@ -26,19 +24,3 @@ if(empty($codepropre->erreur)){  // Si aucune erreur
 	debug($codepropre->erreur); // Affichage des erreurs
 }
 ?>
-<head>
-	<title></title>
-		<script type="text/javascript" src="jquery-1.11.2.min.js"></script>
-		<script type="text/javascript">
-		<?= $run->js; ?>
-		function afficher(){
-			this.append("test");
-		}
-		</script>
-</head>
-<body>
-	<div id="console">
-		<p></p>
-	</div>
-</body>
-</html>
