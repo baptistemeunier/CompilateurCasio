@@ -8,12 +8,14 @@ function init(){
 	/* Initialisation des variables globales */
 	var elementSelect = $('.plus').get(0);
 
+
+
 	/* Affichage de la structure If Else */
 	$('#ifElse').on('click', function(){
 			$(elementSelect.previousSibling).removeClass('mouseOn');
 			$(elementSelect.previousSibling.previousSibling).removeClass('mouseOn');
 			$(elementSelect.previousSibling.previousSibling.previousSibling).removeClass('mouseOn');
-			elementSelect = "";
+			elementSelect = "cliquer";
 	});
 	/* Affichage de la structure If Else */
 	$('#ifElse').on('mouseenter', function(){
@@ -34,13 +36,17 @@ function init(){
 	});
 	/* Affichage de la structure If Else */
 	$('#ifElse').on('mouseleave', function(){
-		if(elementSelect != ""){
+		if(elementSelect != "cliquer"){
 			$(elementSelect.previousSibling).remove();
 			$(elementSelect.previousSibling).remove();
 			$(elementSelect.previousSibling).remove();
 			$(elementSelect.previousSibling).remove();
 		}
 	});
+
+
+
+
 
 	/* Affichage de la boucle while */
 	$('#while').on('click', function(){
@@ -54,6 +60,11 @@ function init(){
 			$(elementSelect.previousSibling).append('<button class="plus">+</button>');
 		
 	});
+
+
+
+
+
 
 	/* Affichage de la boucle while */
 	$('#for').on('click', function(){
@@ -69,19 +80,31 @@ function init(){
 		
 	});
 
-	/* Affichage de l'instruction afficher */
-	$('#write').on('click', function(){
-			$(elementSelect).before('<button class="plus">+</button>');
-			$(elementSelect).before('<input type="text" name="afficher" placeholder="Afficher ...">');
-		
+
+
+
+
+	/* Instrcution Affichage */
+	$('#afficher').on('click', function(){
+		$(elementSelect).before('<button class="plus">+</button>');
+		$(elementSelect).before('<input type="text" name="instruction" class="afficher" placeholder="Afficher ...">');
+		formatageProgramme();
 	});
 
-	/* Affichage d'une instruction */
-	$('#instruction').on('click', function(){
-			$(elementSelect).before('<button class="plus">+</button>');
-			$(elementSelect).before('<input type="text" name="instruction" placeholder="Faire ...">');
-		
+	/* Instruction Calcul */
+	$('#calcul').on('click', function(){
+		$(elementSelect).before('<button class="plus">+</button>');
+		$(elementSelect).before('<input type="text" name="instruction" class="calcul" placeholder="Caluler ...">');
+		formatageProgramme();
 	});
+
+	/* Instruction Lire */
+	$('#lire').on('click', function(){
+		$(elementSelect).before('<button class="plus">+</button>');
+		$(elementSelect).before('<input type="text" name="instruction" class="lire" placeholder="Lire ...">');
+		formatageProgramme();
+	});
+
 
 	/* Affichage d'une condition */
 	$('#condition').on('click', function(){
@@ -89,7 +112,13 @@ function init(){
 			$(elementSelect).before('<input type="text" name="condition" placeholder="Si ...">');
 		
 	});
+	
 
+	
+	
+
+
+	
 	/* On modifie le menu en fonction de l'élément sélectionné */
 	$('nav button').on('click', function(){
 		
@@ -106,58 +135,68 @@ function init(){
 			}else if(this.parentNode.className == 'then'){
 				$('#titleMenu').html('Modifier le ALORS');
 				hideButtons();
-				$('#write').show();
-				$('#instruction').show();
-				$('#ifElse').show();
-				$('#while').show();
-				$('#for').show();
+				showButtons()
 			}else if(this.parentNode.className == 'else'){
 				$('#titleMenu').html('Modifier le SINON');
 				hideButtons();
-				$('#write').show();
-				$('#instruction').show();
-				$('#ifElse').show();
-				$('#while').show();
-				$('#for').show();
+				showButtons()
 			}else if(this.parentNode.className == 'do'){
 				$('#titleMenu').html('Modifier le FAIRE');
 				hideButtons();
-				$('#write').show();
-				$('#instruction').show();
-				$('#ifElse').show();
-				$('#while').show();
-				$('#for').show();
+				showButtons()
 			}else if(this.parentNode.id == 'programme'){
 				$('#titleMenu').html('Ajouter au programme');
 				hideButtons();
-				$('#write').show();
-				$('#instruction').show();
-				$('#ifElse').show();
-				$('#while').show();
-				$('#for').show();
+				showButtons()
 			}
 			elementSelect = this;
 			return false;
 		});
 	});
+
+	$('#submit').on('click', function(){
+		$('form').submit();
+	})
+
+	
 }
 
 /* Fonction pour masquer tout les buttons */
 function hideButtons(){
-	$('#write').hide();
-	$('#instruction').hide();
+	$('#afficher').hide();
+	$('#calcul').hide();
+	$('#lire').hide();
 	$('#ifElse').hide();
 	$('#while').hide();
 	$('#for').hide();
 	$('#condition').hide();
 }
-$(initt)
-function initt(){
-	$('input').on('keyup', function(){
-		var valeurInput = this.value;
-		$('#data').val(valeurInput);
-	});
-	$('#submit').on('click', function(){
 
+/* Fonction pour afficher les buttons récurents */
+function showButtons(){
+	$('#afficher').show();
+	$('#calcul').show();
+	$('#lire').show();
+	$('#ifElse').show();
+	$('#while').show();
+	$('#for').show();
+}
+
+function formatageProgramme(){
+	$('input').on('keyup', function(){
+		var test = "";
+		var valeurForm = document.getElementById('programme');
+		for(var i=0; i<valeurForm.length; i++)
+		{
+			if(valeurForm.elements[i].className != "plus")
+			{
+				test += valeurForm.elements[i].className.toUpperCase()+' '+valeurForm.elements[i].value;
+				if(i < valeurForm.length-2)
+				{
+					test += '#';
+				}
+			}
+		}
+		$('#data').val(test);
 	});
 }
