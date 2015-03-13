@@ -1,6 +1,7 @@
 $(init);
 var n = 0;
 var input;
+var n_instruction = liste_instruction.length;
 function init(){
 	run_instruction();
 	$('#next').on('click', function(){
@@ -19,10 +20,13 @@ function init(){
 }
 
 function run_instruction(){
-	console.log(liste_instruction[n]['fonction']);
 	fn = window[liste_instruction[n]['fonction']];
 	fn(liste_instruction[n]['params']);	
 	n++;
+	if(n_instruction == n){
+		$("#text-console").append("Execution terminée");
+		instruction("Stop");
+	}
 }
 
 function afficher(params){
@@ -57,6 +61,17 @@ function lire(params){
 	$("#text-console").append("> ");
 }
 
+function calcul(params) { 
+	set();
+	var calcul = params['calcul'];
+	for (var i = 0; i < params['calcul'].length; i++) {
+		if (/[A-Z]/.test(params['calcul'][i])){
+			calcul = calcul.replace(params['calcul'][i], window[params['calcul'][i]]);
+		}
+	};
+	window[params['var']] = calc(calcul);
+}
+
 function set(write){
 	if(write){
 		$("#next").hide();
@@ -67,4 +82,9 @@ function set(write){
 		$("#send").hide();
 		$("#next").show();
 	}
+}
+
+
+function calc(calcul) {
+  return new Function('return ' + calcul)();
 }
