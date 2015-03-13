@@ -18,6 +18,10 @@
 			<form method="post" action="#" id="programme">
 				<button class="plus">+</button>
 			</form>
+			<form method="post" action="traitement.php">
+				<input type="text" id="data" name="data">
+				<button id="submit">Validez</button>
+			</form>
 		</section>
 	</body>
-</html>
+</html>AFFICHER Test de afficher#

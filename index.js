@@ -10,6 +10,13 @@ function init(){
 
 	/* Affichage de la structure If Else */
 	$('#ifElse').on('click', function(){
+			$(elementSelect.previousSibling).removeClass('mouseOn');
+			$(elementSelect.previousSibling.previousSibling).removeClass('mouseOn');
+			$(elementSelect.previousSibling.previousSibling.previousSibling).removeClass('mouseOn');
+			elementSelect = "";
+	});
+	/* Affichage de la structure If Else */
+	$('#ifElse').on('mouseenter', function(){
 			$(elementSelect).before('<button class="plus">+</button>');
 			$(elementSelect).before('<div class="if"></div>');
 			$(elementSelect.previousSibling).append('<h3>Si</h3>');
@@ -21,6 +28,18 @@ function init(){
 			$(elementSelect).before('<div class="else"></div>');
 			$(elementSelect.previousSibling).append('<h3>Sinon</h3>');
 			$(elementSelect.previousSibling).append('<button class="plus">+</button>');
+			$(elementSelect.previousSibling).addClass('mouseOn');
+			$(elementSelect.previousSibling.previousSibling).addClass('mouseOn');
+			$(elementSelect.previousSibling.previousSibling.previousSibling).addClass('mouseOn');
+	});
+	/* Affichage de la structure If Else */
+	$('#ifElse').on('mouseleave', function(){
+		if(elementSelect != ""){
+			$(elementSelect.previousSibling).remove();
+			$(elementSelect.previousSibling).remove();
+			$(elementSelect.previousSibling).remove();
+			$(elementSelect.previousSibling).remove();
+		}
 	});
 
 	/* Affichage de la boucle while */
@@ -53,21 +72,21 @@ function init(){
 	/* Affichage de l'instruction afficher */
 	$('#write').on('click', function(){
 			$(elementSelect).before('<button class="plus">+</button>');
-			$(elementSelect).before('<input type="text" name="#" placeholder="Afficher ...">');
+			$(elementSelect).before('<input type="text" name="afficher" placeholder="Afficher ...">');
 		
 	});
 
 	/* Affichage d'une instruction */
 	$('#instruction').on('click', function(){
 			$(elementSelect).before('<button class="plus">+</button>');
-			$(elementSelect).before('<input type="text" name="#" placeholder="Faire ...">');
+			$(elementSelect).before('<input type="text" name="instruction" placeholder="Faire ...">');
 		
 	});
 
 	/* Affichage d'une condition */
 	$('#condition').on('click', function(){
 			$(elementSelect).before('<button class="plus">+</button>');
-			$(elementSelect).before('<input type="text" name="#" placeholder="Si ...">');
+			$(elementSelect).before('<input type="text" name="condition" placeholder="Si ...">');
 		
 	});
 
@@ -131,4 +150,14 @@ function hideButtons(){
 	$('#while').hide();
 	$('#for').hide();
 	$('#condition').hide();
+}
+$(initt)
+function initt(){
+	$('input').on('keyup', function(){
+		var valeurInput = this.value;
+		$('#data').val(valeurInput);
+	});
+	$('#submit').on('click', function(){
+
+	});
 }

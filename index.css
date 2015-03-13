@@ -20,3 +20,6 @@ input {
 	display: block;
 	margin: 10px 0;
 }
+.mouseOn {
+	opacity: 0.5;
+}
