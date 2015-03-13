@@ -61,8 +61,13 @@ class Decode{
 	}
 
 	private function afficher($text){
+			if(preg_match("/^[A-Z]$/", $text)){
+				$params = array('var' => $text);
+			}else{
+				$params = array('text' => $text);				
+			}
 			$this->decode[] = array('fonction' => 'afficher',
-									'params' => array('text' => $text));
+									'params' => $params);
 	}
 	
 	private function lire($var){
