@@ -6,7 +6,7 @@ require "fonctionsdev.php";
 <html>
 <head>
 	<title>Run Console Test</title>
-	<meta charset="UTF-8"></head>
+	<meta charset="UTF-8">
 </head>
 <script type="text/javascript" src="jquery-1.11.2.min.js"></script>
 <?php require "jsonrun.php"; ?>

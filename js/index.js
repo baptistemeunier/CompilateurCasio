@@ -238,7 +238,7 @@ function init(){
 	$('#set').on('mouseenter', function(){
 		$(elementSelect).before('<button class="plus">+</button>');
 		$(elementSelect).before('<select name="set" class="set"></select>');
-		$(elementSelect.previousSibling).append('<option value="DEG">degrés</option>');
+		$(elementSelect.previousSibling).append('<option value="DEG">degres</option>');
 		$(elementSelect.previousSibling).append('<option value="RAD">radian</option>');
 		$(elementSelect.previousSibling).addClass('mouseOn');
 	});
