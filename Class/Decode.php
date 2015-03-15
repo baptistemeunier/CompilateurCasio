@@ -3,7 +3,9 @@
  * Classe Decode
  *
  * Permet d'analyser le code fourni par l'utilisateur
- * @param Text brut des instructions entrées par l'utilisateur
+ * @param String $data Text brut des instructions entrées par l'utilisateur
+ * @author Baptiste Meunier baptiste.meunier0@gmail.com
+ * @version 1.0
  **/
 class Decode{
 

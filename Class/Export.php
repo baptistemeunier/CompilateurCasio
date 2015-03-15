@@ -3,8 +3,11 @@
 * Classe Export
 *
 * Permet de sauvagarder et d'exporter le code de l'utilisateur
-* @param ...
-**/
+ * @param String $code_recu Code brut |String $code_recu Code casio 
+ * @author Baptiste Meunier baptiste.meunier0@gmail.com
+ * @version 0.3.0--alpha
+ * @deprecated 0.3.0--alpha Code passé en JavaScript
+ **/
  
 Class Export{
 

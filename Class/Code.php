@@ -3,8 +3,12 @@
  * Classe Code
  *
  * Permet d'ecrire le code decodé en langage Casio
- * @param Tableau des insctructions
+ *
+ * @param Array $data Tableau des insctructions
+ * @author Baptiste Meunier baptiste.meunier0@gmail.com
+ * @version 0.3.0--alpha
  **/
+
 class Code{
 	public $code; // Le programme en Casio
 
