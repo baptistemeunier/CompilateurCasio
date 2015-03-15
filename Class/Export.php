@@ -8,10 +8,13 @@
  
 Class Export{
 
+	public $saved_db = false;
+	public $saved_txt = false;
+
 	function __construct($code_recu, $code_casio){
 		$time = time(); 
 		$this->savedb($code_recu, $time);
-		//$this->savetxt($code_casio, $time);
+		$this->savetxt($code_casio, $time);
 	}
 
 	function savedb($code, $time){
@@ -22,12 +25,14 @@ Class Export{
 			'time' => $time,
 			'programme' => $code
 		));
+		$this->saved_db = true;
 	}
 	
 	function savetxt($code, $time){
 		$fichier = fopen("save_code/".$time.'.txt', 'a+');
 		fwrite($fichier, $code);
 		fclose($fichier);
+		$this->saved_txt = $time;
 	}
 }
 ?>
