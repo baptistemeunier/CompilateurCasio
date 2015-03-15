@@ -19,7 +19,13 @@ Class Export{
 		$this->savedb($code_recu, $time);
 		$this->savetxt($code_casio, $time);
 	}
-
+	/**
+	 * Function savedb
+	 *
+	 * Sauvegarde le code en BDD
+	 * @param String $code Code brut | int $time le time() du moment où le classe a été appelée
+	 * @return void
+	 **/
 	function savedb($code, $time){
 		$sql = Config::sql_connect();
 		$requete = $sql->prepare("INSERT INTO programmes(user_id, time, programme) VALUES(:user_id, :time, :programme)");
@@ -30,7 +36,13 @@ Class Export{
 		));
 		$this->saved_db = true;
 	}
-	
+	/**
+	 * Function savetxt
+	 *
+	 * Sauvegarde le code en txt
+	 * @param String $code Code casio | int $time le time() du moment où le classe a été appelée
+	 * @return void
+	 **/
 	function savetxt($code, $time){
 		$fichier = fopen("save_code/".$time.'.txt', 'a+');
 		fwrite($fichier, $code);

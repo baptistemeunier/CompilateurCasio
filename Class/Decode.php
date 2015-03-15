@@ -41,7 +41,7 @@ class Decode{
 	 *
 	 * Ajoute la variable au tableau des variables (si besoin)
 	 * @param La variable à ajouter (String [A-Z])
-	 * @return Boolean variable ajoutée ou non
+	 * @return boolean variable ajoutée ou non
 	 **/
 	private function varAdd($var){
 		$var = trim($var);
@@ -54,14 +54,21 @@ class Decode{
 	/**
 	 * Function instruction
 	 *
-	 * Ajoute l'instruction à la liste des insctructions
-	 * @param La fonction à ajouté et les parametres
+	 * Ajoute l'instruction simple à la liste des insctructions
+	 * @param String $fonction La fonction à ajouté et les parametres
+	 * @return void
 	 **/
-	private function instruction($params){
+	private function instruction($fonction){
 			$this->decode[] = array('fonction' => 'instruction',
-									'params' => ucfirst(strtolower($params)));
+									'params' => ucfirst(strtolower($fonction)));
 	}
-
+	/**
+	 * Function afficher
+	 *
+	 * Ajoute l'instruction afficher à la liste des insctructions
+	 * @param String $text Le contenu à afficher 
+	 * @return void
+	 **/
 	private function afficher($text){
 			if(preg_match("/^[A-Z]$/", $text)){
 				$params = array('var' => $text);
@@ -71,18 +78,36 @@ class Decode{
 			$this->decode[] = array('fonction' => 'afficher',
 									'params' => $params);
 	}
-	
+	/**
+	 * Function lire
+	 *
+	 * Ajoute l'instruction lire à la liste des insctructions
+	 * @param Char/String $var La variable à lire 
+	 * @return void
+	 **/
 	private function lire($var){
 			$this->decode[] = array('fonction' => 'lire',
 									'params' => array('var' => $var));
 	}
-	
+	/**
+	 * Function calcul
+	 *
+	 * Ajoute l'instruction calcul à la liste des insctructions
+	 * @param String $params Le calcul à afficher 
+	 * @return void
+	 **/
 	private function calcul($params){
 			$params = explode("=", $params);
 			$this->decode[] = array('fonction' => 'calcul',
 									'params' => array('var' => $params[0], 'calcul' => $params[1]));
 	}
-
+	/**
+	 * Function set
+	 *
+	 * Ajoute le parametre à la liste des insctructions
+	 * @param String $text Le parametre à modifier
+	 * @return void
+	 **/
 	private function set($set){
 		$set = ucfirst(strtolower($set));
 		$liste_set = array('Deg', 'Rad', 'Gra');
@@ -92,10 +117,6 @@ class Decode{
 		}else{
 			$this->erreur[] = 'WARNING#Parametre '.$set.' inconnu';
 		}	
-	}
-
-	private function error(){
-		debug($this->erreur);
 	}
 }
 

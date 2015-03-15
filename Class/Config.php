@@ -13,7 +13,12 @@ class Config{
 						 'dbname' => 'isn',
 						 'user' => 'root',
 						 'password' => ''); // Parametre SQL
-	
+	/**
+	 * Function sql_connect
+	 *
+	 * Se connecte à la base de données 
+	 * @return PDO Object $db
+	 **/
 	static function sql_connect(){
 		try {
 		     $db = new PDO('mysql:dbname='.self::$sql['dbname'].';host='.self::$sql['host'], self::$sql['user'], self::$sql['password']);
