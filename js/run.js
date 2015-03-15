@@ -20,8 +20,12 @@ function init(){
 }
 
 function run_instruction(){
-	fn = window[liste_instruction[n]['fonction']];
-	fn(liste_instruction[n]['params']);	
+	if(liste_instruction[n]['fonction'] != "set"){
+		fn = window[liste_instruction[n]['fonction']];
+		fn(liste_instruction[n]['params']);
+	}else{
+		set();
+	}
 	n++;
 	if(n_instruction == n){
 		$("#text-console").append("Execution terminée");
