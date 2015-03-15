@@ -1,0 +1,28 @@
+.console{
+	margin-left: 200px;
+	margin-top: 50px;
+	width: 500px;
+	height: 700px;
+	background-color: #000;
+	color: #FFF;
+	padding: 20px;
+}
+.input{
+	width: 540px;
+	height: 50px;
+	margin-left: 200px;
+	/*background-color: blue;
+	color: #FFF;*/
+}
+input{
+	width: 400px;
+	height: 45px;
+}
+#send{
+	width: 10px;
+	height: 50px;
+}
+#next{
+	width: 540px;
+	height: 50px;
+}
