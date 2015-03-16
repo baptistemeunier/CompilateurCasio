@@ -16,8 +16,8 @@ Class Export{
 
 	function __construct($code_recu, $code_casio){
 		$time = time(); 
-		$this->savedb($code_recu, $time);
-		$this->savetxt($code_casio, $time);
+		//$this->savedb($code_recu, $time);
+		//$this->savetxt($code_casio, $time);
 	}
 	/**
 	 * Function savedb

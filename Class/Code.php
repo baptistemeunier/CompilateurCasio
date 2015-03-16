@@ -73,6 +73,17 @@ class Code{
 	function set($params){
 		$this->code .= $params['set']."\n";
 	}
+	function si($params){
+		$this->code .= "If ".$params['if']['condition']."\nThen ";
+		foreach ($params['if']['instruction'] as $inctruction) {
+			$this->$inctruction['fonction']($inctruction['params']);
+		}
+		$this->code .= "If ".$params['if']['condition']."\nElse ";
+		foreach ($params['else'] as $inctruction) {
+			$this->$inctruction['fonction']($inctruction['params']);
+		}
+		$this->code .= "IfEnd\n";
+	}
 }
 
 ?>

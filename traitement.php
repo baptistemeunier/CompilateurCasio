@@ -8,7 +8,7 @@ require "Class/Code.php";
 require "Class/Run.php";
 require "Class/Export.php";
 
-$data = "AFFICHER C=A/B#AFFICHER Saisir A#LIRE A#AFFICHER Saisir B#LIRE B#CALCUL C=A/B#AFFICHER C =#AFFICHER C";
+$data = "AFFICHER Saisir A#LIRE A#IF A=2~AFFICHER Test A=2~LIRE R~CALCUL D=A+R~AFFICHER D~ELSE~AFFICHER Test A!=2~AFFICHER A#AFFICHER Fin du IF";
 if(isset($_POST['data'])){ // Si une données est envoyée
 	$data = $_POST['data'];
 }
@@ -25,6 +25,7 @@ if(empty($codepropre->erreur)){  // Si aucune erreur
 	<head>
 		<title>Affichage du programme</title>
 		<meta charset="UTF-8">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:700,300,600,800,400' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="css/traitement.css">
 	</head>
 	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
