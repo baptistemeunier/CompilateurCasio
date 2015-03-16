@@ -7,22 +7,22 @@
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:700,300,600,800,400' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/css.js"></script>
 		<title>Casio</title>
 	</head>
 	<body id="body">
 		<section>
 			<?php require('nav.php'); ?>
 			<form method="post" action="traitement.php" id="programme">
-				<h1>Programme</h1>
-				<input type="text" name="title" id="title" placeholder="Entrer le nom du programme ?">
-				<label for="save_db">Sauvegarder le programme sur votre profil : </label>
-				<input type="checkbox" name="save_db">
-				<label for="save_txt">Exporter le programme format txt</label>
-				<input type="checkbox" name="save_txt">
-				<label for="save_public">Rendre le programme public</label>
-				<input type="checkbox" name="save_public">
+				<input type="text" name="title" id="title" value="Nom du programme ?">
 				<button class="plus">+</button>
 				<input type="text" id="data" name="data" placeholder="variable test d'envoie">
+				<label for="save_db">Sauvegarder le programme sur votre profil : </label>
+				<input type="checkbox" name="save_db" class="checkbox"><br>
+				<label for="save_txt">Exporter le programme format txt : </label>
+				<input type="checkbox" name="save_txt" class="checkbox"><br>
+				<label for="save_public">Rendre le programme public : </label>
+				<input type="checkbox" name="save_public" class="checkbox">
 				<button id="submit">Validez</button>
 			</form>
 		</section>

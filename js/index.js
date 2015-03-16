@@ -340,7 +340,7 @@ function formatageProgramme(){
 		var valeurForm = document.getElementById('programme');
 		for(var i=0; i<valeurForm.length; i++)
 		{
-			if(valeurForm.elements[i].className != "plus" && valeurForm.elements[i].id != "data" && valeurForm.elements[i].id != "title")
+			if(valeurForm.elements[i].className != "plus" && valeurForm.elements[i].id != "data" && valeurForm.elements[i].id != "title" && valeurForm.elements[i].className != "checkbox")
 			{
 				test += valeurForm.elements[i].className.toUpperCase()
 				if(valeurForm.elements[i].value != "CLRTXT") test += ' ';
