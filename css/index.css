@@ -1,6 +1,7 @@
 body {
 	text-align: center;
 	background-color: #00CED1;
+	font-family: 'Open Sans', sans-serif;
 }
 section {
 	display: inline-block;
@@ -21,7 +22,6 @@ form div {
 	border-left: #00CED1 5px solid;
 	color: #00CED1;
 	padding: 0 20px;
-	font-family: 'Open Sans', sans-serif;
 }
 form input, form select {
 	display: block;
@@ -49,12 +49,31 @@ form button:hover {
 .mouseOn {
 	opacity: 0.5;
 }
-h1, h2 {
+h2 {
 	text-align: center;
 	color: #00CED1;
 }
 form p {
 	color: #00CED1;
+	width: 250px;
+}
+#title {
+	display: block;
+	width: 100%;
+	background-color: rgba(0,0,0,0);
+	text-align: center;
+	font-size: 1.7em;
+}
+label {
+	display: inline-block;
+	color: #555;
+	width: 280px;
+	font-size: 0.8em;
+}
+.checkbox {
+	display: inline-block;
+	margin: 0; padding: 0;
+	width: 15px; height: 15px;
 }
 ::-webkit-scrollbar {
 	width: 15px;
