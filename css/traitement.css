@@ -30,6 +30,20 @@ html{
 .console{
 	width: 500px;
 	height: 695px;
+	overflow-y: scroll;
+
+}
+.console::-webkit-scrollbar {
+    background-color: white;
+}
+ 
+.console::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+.console::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }
 h2{
 	text-align: center;
