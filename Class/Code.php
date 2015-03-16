@@ -84,6 +84,13 @@ class Code{
 		}
 		$this->code .= "IfEnd\n";
 	}
+	function bouclewhile($params){
+		$this->code .= "While ".$params['condition']."\n";
+		foreach ($params['instruction'] as $instruction) {
+			$this->$instruction['fonction']($instruction['params']);
+		}
+		$this->code .= "WhileEnd\n";
+	}
 }
 
 ?>

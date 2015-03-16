@@ -130,3 +130,14 @@ function ifelse(params) {
   si_max = listeif.length;
   run_instruction();
 }
+
+function bouclewhile(params) {
+  //var condition = params['condition'].split("==");
+  //si = 0;
+ // n++;
+  /*while(window[condition[0]] == parseFloat(condition[1])){
+	listeif = params['if']['instruction'];	
+  }
+  si_max = listeif.length;
+  run_instruction();*/
+}

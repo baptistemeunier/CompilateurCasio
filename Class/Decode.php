@@ -37,6 +37,9 @@ class Decode{
 			if(substr($instruction, 0, 2)=="IF"){
 				$add = $this->condition($instruction);
 			}
+			if(substr($instruction, 0, 5)=="WHILE"){
+				$add = $this->bouclewhile($instruction);
+			}
 			$this->decode[] = $add;
 		}
 	}
@@ -117,6 +120,37 @@ class Decode{
 														'instruction' => $if),
 						 					'else' => $else));
 	}
+	private function bouclewhile($params){
+		$params = explode("&", $params);
+		$params[0] = explode(" ", $params[0]);
+		$condition = $params[0][1];
+		unset($params[0]);
+		foreach ($params as $k => $instruc) { // Pour chaque instruction
+			unset($params[$k]);
+			if($instruc == "ELSE"){
+				break 1;
+			}
+			foreach ($this->fonction_simple as $fonction) { // Si c'est une instruction simple
+				if($instruc == $fonction){
+					$while[] = $this->instruc($fonction); // Ajouts de l'instructions
+					break;
+				}
+			}
+			foreach ($this->fonction_match as $match => $fonction) { // Si c'est une fonction complexe
+				if(preg_match($match, $instruc, $find)){
+					$while[] = $this->$fonction($find[1]); // Ajouts de l'instructions
+					break;
+				}
+			}
+			if(substr($instruc, 0, 2)=="IF"){
+				//$this->condition($instruc);
+			}
+		}
+		return array('fonction' => 'bouclewhile',
+					 'params' => array('condition' => $condition,
+					 'instruction' => $while));
+	}
+
 	/**
 	 * Function afficher
 	 *

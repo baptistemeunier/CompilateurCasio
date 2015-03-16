@@ -8,15 +8,14 @@ require "Class/Code.php";
 require "Class/Run.php";
 require "Class/Export.php";
 
-$data = "AFFICHER Saisir A#LIRE A#IF A=2~AFFICHER Test A=2~LIRE R~CALCUL D=A+R~AFFICHER D~ELSE~AFFICHER Test A!=2~AFFICHER A#AFFICHER Fin du IF";
+$data = "AFFICHER Saisir A#LIRE A#WHILE A==1&AFFICHER A&LIRE A&AFFICHER PGM#AFFICHER Sorti";
 if(isset($_POST['data'])){ // Si une données est envoyée
 	$data = $_POST['data'];
 }
-$export['titre'] = isset($_POST['titre'])?$_POST['titre']:md5(sha1(rand()));
-$export['save_db'] = isset($_POST['db'])?true:false;
-$export['save_txt'] = isset($_POST['txt'])?true:false;
+$export['titre'] = isset($_POST['title'])?$_POST['title']:md5(sha1(rand()));
+$export['save_db'] = isset($_POST['save_db'])?true:false;
+$export['save_txt'] = isset($_POST['save_txt'])?true:false;
 
-debug($export);
 
 $codepropre = new Decode($data); // Decode le code recu par le formulaire
 if(empty($codepropre->erreur)){  // Si aucune erreur
