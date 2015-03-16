@@ -1,0 +1,60 @@
+html{
+	font-family: 'Open Sans', sans-serif;
+}
+#console{
+	margin-left: 100px;
+	width: 500px;
+	height: 800px;
+	background-color: #000;
+	color: #FFF;
+	padding: 20px;
+	float: left;
+}
+#code{
+	margin-left: 640px;
+	margin-top: 50px;
+	width: 500px;
+	height: 380px;
+	background-color: #F4A460;
+	color: #FFF;
+	padding: 20px;
+}
+#save{
+	margin-left: 640px;
+	width: 500px;
+	height: 380px;
+	background-color: grey;
+	color: #FFF;
+	padding: 20px;
+}
+.console{
+	width: 500px;
+	height: 695px;
+}
+h2{
+	text-align: center;
+}
+a{
+	text-decoration: none;
+	color: #66F460;
+}
+input{
+	width: 400px;
+	height: 45px;
+}
+#send{
+	width: 90px;
+	height: 50px;
+}
+#next{
+	width: 500px;
+	height: 50px;
+}
+.error{
+	font-weight: bold;
+	color: #F46066;
+}
+.valid{
+	font-weight: bold;
+	color: #66F460;
+}

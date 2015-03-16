@@ -7,8 +7,9 @@ require "fonctionsdev.php";
 <head>
 	<title>Run Console Test</title>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/run.css">
 </head>
-<script type="text/javascript" src="jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 <?php require "jsonrun.php"; ?>
 <script type="text/javascript" src="js/run.js"></script>
 <body>

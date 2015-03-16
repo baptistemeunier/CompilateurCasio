@@ -2,8 +2,8 @@
 <html lang="FR" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="index.css" />
-		<link rel="stylesheet" type="text/css" href="nav.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/nav.css" />
 		<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 		<title>Casio</title>

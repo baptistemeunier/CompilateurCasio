@@ -3,7 +3,9 @@
  * Classe Decode
  *
  * Permet d'analyser le code fourni par l'utilisateur
- * @param Text brut des instructions entrées par l'utilisateur
+ * @param String $data Text brut des instructions entrées par l'utilisateur
+ * @author Baptiste Meunier baptiste.meunier0@gmail.com
+ * @version 1.0
  **/
 class Decode{
 
@@ -22,16 +24,20 @@ class Decode{
 		foreach ($inctructions as $instruction) { // Pour chaque instruction
 			foreach ($this->fonction_simple as $fonction) { // Si c'est une instruction simple
 				if($instruction == $fonction){
-					$this->instruction($fonction); // Ajouts de l'instructions
+					$add = $this->instruction($fonction); // Ajouts de l'instructions
 					break;
 				}
 			}
 			foreach ($this->fonction_match as $match => $fonction) { // Si c'est une fonction complexe
 				if(preg_match($match, $instruction, $find)){
-					$this->$fonction($find[1]); // Ajouts de l'instructions
+					$add = $this->$fonction($find[1]); // Ajouts de l'instructions
 					break;
 				}
 			}
+			if(substr($instruction, 0, 2)=="IF"){
+				$add = $this->condition($instruction);
+			}
+			$this->decode[] = $add;
 		}
 	}
 	/**
@@ -39,7 +45,7 @@ class Decode{
 	 *
 	 * Ajoute la variable au tableau des variables (si besoin)
 	 * @param La variable à ajouter (String [A-Z])
-	 * @return Boolean variable ajoutée ou non
+	 * @return boolean variable ajoutée ou non
 	 **/
 	private function varAdd($var){
 		$var = trim($var);
@@ -52,48 +58,120 @@ class Decode{
 	/**
 	 * Function instruction
 	 *
-	 * Ajoute l'instruction à la liste des insctructions
-	 * @param La fonction à ajouté et les parametres
+	 * Ajoute l'instruction simple à la liste des insctructions
+	 * @param String $fonction La fonction à ajouté et les parametres
+	 * @return void
 	 **/
-	private function instruction($params){
+	private function instruction($fonction){
 			$this->decode[] = array('fonction' => 'instruction',
-									'params' => ucfirst(strtolower($params)));
+									'params' => ucfirst(strtolower($fonction)));
 	}
-
+	private function condition($params){
+		$params = explode("~", $params);
+		$params[0] = explode(" ", $params[0]);
+		$condition = $params[0][1];
+		unset($params[0]);
+		foreach ($params as $k => $instruc) { // Pour chaque instruction
+			unset($params[$k]);
+			if($instruc == "ELSE"){
+				break 1;
+			}
+			foreach ($this->fonction_simple as $fonction) { // Si c'est une instruction simple
+				if($instruc == $fonction){
+					$if[] = $this->instruc($fonction); // Ajouts de l'instructions
+					break;
+				}
+			}
+			foreach ($this->fonction_match as $match => $fonction) { // Si c'est une fonction complexe
+				if(preg_match($match, $instruc, $find)){
+					$if[] = $this->$fonction($find[1]); // Ajouts de l'instructions
+					break;
+				}
+			}
+			if(substr($instruc, 0, 2)=="IF"){
+				//$this->condition($instruc);
+			}
+		}
+		foreach ($params as $instruc) { // Pour chaque instruction
+			if($instruc == "ELSE"){
+				break 1;
+			}
+			foreach ($this->fonction_simple as $fonction) { // Si c'est une instruction simple
+				if($instruc == $fonction){
+					$else[] = $this->instruc($fonction); // Ajouts de l'instructions
+					break;
+				}
+			}
+			foreach ($this->fonction_match as $match => $fonction) { // Si c'est une fonction complexe
+				if(preg_match($match, $instruc, $find)){
+					$else[] = $this->$fonction($find[1]); // Ajouts de l'instructions
+					break;
+				}
+			}
+			if(substr($instruc, 0, 2)=="IF"){
+				//$this->condition($instruc);
+			}
+		}
+			return array('fonction' => 'si',
+						 'params' => array('if' =>	array('condition' => $condition,
+														'instruction' => $if),
+						 					'else' => $else));
+	}
+	/**
+	 * Function afficher
+	 *
+	 * Ajoute l'instruction afficher à la liste des insctructions
+	 * @param String $text Le contenu à afficher 
+	 * @return void
+	 **/
 	private function afficher($text){
 			if(preg_match("/^[A-Z]$/", $text)){
 				$params = array('var' => $text);
 			}else{
 				$params = array('text' => $text);				
 			}
-			$this->decode[] = array('fonction' => 'afficher',
-									'params' => $params);
+			return array('fonction' => 'afficher',
+					'params' => $params);
 	}
-	
+	/**
+	 * Function lire
+	 *
+	 * Ajoute l'instruction lire à la liste des insctructions
+	 * @param Char/String $var La variable à lire 
+	 * @return void
+	 **/
 	private function lire($var){
-			$this->decode[] = array('fonction' => 'lire',
+			return array('fonction' => 'lire',
 									'params' => array('var' => $var));
 	}
-	
+	/**
+	 * Function calcul
+	 *
+	 * Ajoute l'instruction calcul à la liste des insctructions
+	 * @param String $params Le calcul à afficher 
+	 * @return void
+	 **/
 	private function calcul($params){
 			$params = explode("=", $params);
-			$this->decode[] = array('fonction' => 'calcul',
+			return array('fonction' => 'calcul',
 									'params' => array('var' => $params[0], 'calcul' => $params[1]));
 	}
-
+	/**
+	 * Function set
+	 *
+	 * Ajoute le parametre à la liste des insctructions
+	 * @param String $text Le parametre à modifier
+	 * @return void
+	 **/
 	private function set($set){
 		$set = ucfirst(strtolower($set));
 		$liste_set = array('Deg', 'Rad', 'Gra');
 		if(in_array($set, $liste_set)){
-			$this->decode[] = array('fonction' => 'set',
+			return array('fonction' => 'set',
 									'params' => array('set' => $set));
 		}else{
 			$this->erreur[] = 'WARNING#Parametre '.$set.' inconnu';
 		}	
-	}
-
-	private function error(){
-		debug($this->erreur);
 	}
 }
 

@@ -1,9 +1,11 @@
 $(init);
 var n = 0;
 var input;
+var si=-1;
+var listeif;
 var n_instruction = liste_instruction.length;
 function init(){
-	run_instruction();
+	run_instruction(liste_instruction[0]);
 	$('#next').on('click', function(){
 		run_instruction();
 		return false;
@@ -20,13 +22,32 @@ function init(){
 }
 
 function run_instruction(){
-	fn = window[liste_instruction[n]['fonction']];
-	fn(liste_instruction[n]['params']);	
-	n++;
-	if(n_instruction == n){
+	var k;
+	var liste = liste_instruction;
+	if(si == -1){
+		k=n
+	}else{
+		k=si;
+		liste = listeif;
+	}
+	console.log(k);
+	if(liste[n]['fonction'] != "set"){
+		console.log(liste);
+		console.log(liste[k]['fonction']);
+		console.log(liste[k]['params']);
+		fn = window[liste[k]['fonction']];
+		fn(liste[k]['params']);
+	}else{
+		set();
+	}
+	if(si ==-1){
+		n++;
+	}	
+	if(n_instruction == k){
 		$("#text-console").append("Execution terminée");
 		instruction("Stop");
 	}
+
 }
 
 function afficher(params){
@@ -87,4 +108,15 @@ function set(write){
 
 function calc(calcul) {
   return new Function('return ' + calcul)();
+}
+
+function si(params) {
+  var condition = params['if']['condition'].split("=");
+  si = 0;
+  if(window[condition[0]] == parseFloat(condition[1])){
+	listeif = params['if']['instruction'];	
+  }else{
+  	listeif = params['else'];
+  }
+  
 }
