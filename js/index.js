@@ -345,7 +345,7 @@ function formatageProgramme(){
 				test += valeurForm.elements[i].className.toUpperCase()
 				if(valeurForm.elements[i].value != "CLRTXT") test += ' ';
 				test += valeurForm.elements[i].value;
-				if(i < valeurForm.length-4)
+				if(i < valeurForm.length-8)
 				{
 					test += '#';
 				}
