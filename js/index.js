@@ -14,7 +14,7 @@ function init(){
 			$(elementSelect).before('<button class="plus">+</button>');
 			$(elementSelect).before('<div class="if"></div>');
 			$(elementSelect.previousSibling).append('<h3>Si</h3>');
-			$(elementSelect.previousSibling).append('<input type="text" name="#" placeholder="Si ...">');
+			$(elementSelect.previousSibling).append('<input type="text" name="#" class="si" placeholder="Si ...">');
 			$(elementSelect.previousSibling).append('<button class="plus">+</button>');
 			$(elementSelect).before('<div class="then"></div>');
 			$(elementSelect.previousSibling).append('<h3>Alors</h3>');
@@ -32,6 +32,7 @@ function init(){
 			$(elementSelect.previousSibling.previousSibling).removeClass('mouseOn');
 			$(elementSelect.previousSibling.previousSibling.previousSibling).removeClass('mouseOn');
 			elementSelect = "cliquer";
+			conditionSi();
 	});
 	/* Efface la structure If Else si le bouton n'a pas été activé */
 	$('#ifElse').on('mouseleave', function(){
@@ -52,7 +53,7 @@ function init(){
 		$(elementSelect).before('<button class="plus">+</button>');
 		$(elementSelect).before('<div class="while"></div>');
 		$(elementSelect.previousSibling).append('<h3>Tant que</h3>');
-		$(elementSelect.previousSibling).append('<input type="text" name="#" placeholder="Tant que">');
+		$(elementSelect.previousSibling).append('<input type="text" name="#" class="si" placeholder="Tant que">');
 		$(elementSelect.previousSibling).append('<button class="plus">+</button>');
 		$(elementSelect).before('<div class="do"></div>');
 		$(elementSelect.previousSibling).append('<h3>Faire</h3>');
@@ -65,6 +66,7 @@ function init(){
 		$(elementSelect.previousSibling).removeClass('mouseOn');
 		$(elementSelect.previousSibling.previousSibling).removeClass('mouseOn');
 		elementSelect = "cliquer";
+		conditionSi();
 	});
 	/* Efface la structure While si le bouton n'a pas été activé */
 	$('#while').on('mouseleave', function(){
@@ -158,12 +160,16 @@ function init(){
 
 
 
-
+	var alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 
 	/* Afficher l'instruction Lire sur un passage de la souris */
 	$('#lire').on('mouseenter', function(){
 		$(elementSelect).before('<button class="plus">+</button>');
-		$(elementSelect).before('<input type="text" name="instruction" class="lire" placeholder="Lire ...">');
+		$(elementSelect).before('<select name="instruction" class="lire"></select>');
+		for(var i=0; i<alphabet.length; i++)
+		{
+			$(elementSelect.previousSibling).append('<option value="'+alphabet[i]+'">Lire '+alphabet[i]+'</option>');
+		}
 		$(elementSelect.previousSibling).addClass('mouseOn');
 	});
 	/* Affichage de l'instrcution Lire sur un click */
@@ -262,7 +268,7 @@ function init(){
 
 	
 	/* On modifie le menu en fonction de l'élément sélectionné */
-	$('nav button').on('click', function(){
+	$('#navLeft button').on('click', function(){
 		
 		/* On affiche l'ecran de selection */
 		$('#titleMenu').html('Veuillez saisir un element !!!');
@@ -334,18 +340,40 @@ function formatageProgramme(){
 		var valeurForm = document.getElementById('programme');
 		for(var i=0; i<valeurForm.length; i++)
 		{
-			if(valeurForm.elements[i].className != "plus")
+			if(valeurForm.elements[i].className != "plus" && valeurForm.elements[i].id != "data" && valeurForm.elements[i].id != "title")
 			{
 				test += valeurForm.elements[i].className.toUpperCase()
 				if(valeurForm.elements[i].value != "CLRTXT") test += ' ';
 				test += valeurForm.elements[i].value;
-				if(i < valeurForm.length-2)
+				if(i < valeurForm.length-4)
 				{
 					test += '#';
 				}
 			}
 		}
 		$('#data').val(test);
-	console.log(valeurForm.elements[1].value);
+	});
+}
+
+function conditionSi(){
+	$('.si').on('focus', function(){
+		var valeur = this.value;
+		if(!valeur.match(/^ *([a-zA-Z]+|[0-9]+) *(<|>|==|<=|>=|!=) *([a-zA-Z]+|[0-9]+) *$/) || !valeur.match(/^ *(".+"|[a-zA-Z]+) *(==|!=) *(".+"|[a-zA-Z]+) *$/)){
+			this.style.boxShadow = '0 0 30px red';
+		}
+	});
+	$('.si').on('keyup', function(){
+		var valeur = this.value;
+		if(valeur.match(/^ *([a-zA-Z]+|[0-9]+) *(<|>|==|<=|>=|!=) *([a-zA-Z]+|[0-9]+) *$/) || valeur.match(/^ *(".+"|[a-zA-Z]+) *(==|!=) *(".+"|[a-zA-Z]+) *$/)){
+			this.style.boxShadow = '0 0 15px lime';
+		}else{
+			this.style.boxShadow = '0 0 30px red';
+		}
+	});
+	$('.si').on('blur', function(){
+		var valeur = this.value;
+		if(valeur.match(/^ *([a-zA-Z]+|[0-9]+) *(<|>|==|<=|>=|!=) *([a-zA-Z]+|[0-9]+) *$/) || valeur.match(/^ *(".+"|[a-zA-Z]+) *(==|!=) *(".+"|[a-zA-Z]+) *$/)){
+			this.style.boxShadow = '0 0 0 white';
+		}
 	});
 }
