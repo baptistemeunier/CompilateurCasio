@@ -112,7 +112,7 @@ class Decode{
 				//$this->condition($instruc);
 			}
 		}
-			return array('fonction' => 'si',
+			return array('fonction' => 'ifelse',
 						 'params' => array('if' =>	array('condition' => $condition,
 														'instruction' => $if),
 						 					'else' => $else));
