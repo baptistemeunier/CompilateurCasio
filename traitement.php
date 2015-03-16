@@ -12,10 +12,16 @@ $data = "AFFICHER Saisir A#LIRE A#IF A=2~AFFICHER Test A=2~LIRE R~CALCUL D=A+R~A
 if(isset($_POST['data'])){ // Si une données est envoyée
 	$data = $_POST['data'];
 }
+$export['titre'] = isset($_POST['titre'])?$_POST['titre']:md5(sha1(rand()));
+$export['save_db'] = isset($_POST['db'])?true:false;
+$export['save_txt'] = isset($_POST['txt'])?true:false;
+
+debug($export);
+
 $codepropre = new Decode($data); // Decode le code recu par le formulaire
 if(empty($codepropre->erreur)){  // Si aucune erreur
 	$code = new Code($codepropre->decode);   // Formate le code en langage Casio
-	$save = new Export($data , $code->code); // Sauvegarde (bdd et txt)
+	$save = new Export($data, $code->code, $export); // Sauvegarde (bdd et txt)
 }else{
 	debug($codepropre->erreur); // Affichage des erreurs
 }
