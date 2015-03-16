@@ -1,11 +1,32 @@
-nav {
-	position: fixed;
-	left: 0; top: 0;
-	width: 200px;
-	height: 100%;
-	background-color: orange;
+#navLeft {
+	display: inline-block;
+	width: 250px; height: 100%;
+	color: #000;
+	margin: 0; padding: 0;
+	background-color: #222;
+	float: left;
+	border-right: 1px #00CED1 solid;
 }
-nav button {
-	width: 80%;
-	margin: 10px 0;
+#navLeft button {
+	height: 40px; width: 80%;
+	border: 0;
+	margin: 5px 0 5px 40px;
+	background-color: #222;
+	text-align: left;
+	color: #555;
+	font-family: 'Open Sans', sans-serif;
+	outline: none;
+}
+#navLeft button:hover {
+	cursor: pointer;
+	color: #00CED1;
+}
+#navRight {
+	display: inline-block;
+	width: 250px; height: 100%;
+	color: #000;
+	margin: 0; padding: 0;
+	background-color: #222;
+	float: right;
+	border-left: 1px #00CED1 solid;
 }
