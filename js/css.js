@@ -22,9 +22,11 @@ function init(){
 		if(checkbox.checked == false)
 		{
 			checkbox.checked = true;
+			this.style.color = '#00CED1';
 		}else
 		{
 			checkbox.checked = false;
+			this.style.color = '#555';
 		}
 	});
 
@@ -32,12 +34,20 @@ function init(){
 		this.previousSibling.previousSibling.style.color = "#00CED1";
 	});
 	$('.checkbox').on('mouseleave', function(){
-		this.previousSibling.previousSibling.style.color = "#555";
+		if(this.checked == true){
+			this.previousSibling.previousSibling.style.color = "#00CED1";
+		}else{
+			this.previousSibling.previousSibling.style.color = "#555";
+		}
 	});
 	$('label').on('mouseenter', function(){
 		this.style.color = "#00CED1";
 	});
 	$('label').on('mouseleave', function(){
-		this.style.color = "#555";
+		if(this.nextSibling.nextSibling.checked == true){
+			this.style.color = "#00CED1";
+		}else{
+			this.style.color = "#555";
+		}
 	});
 }

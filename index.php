@@ -13,18 +13,18 @@
 	<body id="body">
 		<section>
 			<?php require('nav.php'); ?>
-			<form method="post" action="traitement.php">
+			<form method="post" name="form" onsubmit="return validateForm()" id="formulaire" action="traitement.php">
 				<input type="text" name="title" id="title" value="Nom du programme ?">
 				<div id="programme">
-					<button class="plus test">+</button>
+					<button class="plus">+</button>
 				</div>
 				<div id="footer">
-					<button id="submit">Validez</button>
 					<input type="hidden" id="data" name="data" placeholder="variable test d'envoie">
+					<button id="submit">Validez</button>
 					<label for="save_db">Sauvegarder le programme sur votre profil : </label>
-					<input type="checkbox" name="save_db" class="checkbox"><br>
+					<input type="checkbox" name="save_db" class="checkbox">
 					<label for="save_txt">Exporter le programme en format txt : </label>
-					<input type="checkbox" name="save_txt" class="checkbox"><br>
+					<input type="checkbox" name="save_txt" class="checkbox">
 					<label for="save_public">Rendre le programme public : </label>
 					<input type="checkbox" name="save_public" class="checkbox">
 				</div>

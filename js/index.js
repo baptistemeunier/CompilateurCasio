@@ -43,7 +43,7 @@ function ifThenElse(){
 		$(elementSelect).before('<button class="plus">+</button>');
 		$(elementSelect).before('<div class="if"></div>');
 		$(elementSelect.previousSibling).append('<h3>Si</h3>');
-		$(elementSelect.previousSibling).append('<input type="text" name="#" class="si" placeholder="Si ...">');
+		$(elementSelect.previousSibling).append('<input type="text" name="condition" placeholder="Si ...">');
 		$(elementSelect.previousSibling).append('<button class="plus">+</button>');
 		$(elementSelect).before('<div class="then"></div>');
 		$(elementSelect.previousSibling).append('<h3>Alors</h3>');
@@ -81,7 +81,7 @@ function whileDo(){
 		$(elementSelect).before('<button class="plus">+</button>');
 		$(elementSelect).before('<div class="while"></div>');
 		$(elementSelect.previousSibling).append('<h3>Tant que</h3>');
-		$(elementSelect.previousSibling).append('<input type="text" name="#" class="si" placeholder="Tant que">');
+		$(elementSelect.previousSibling).append('<input type="text" name="condition" placeholder="Tant que">');
 		$(elementSelect.previousSibling).append('<button class="plus">+</button>');
 		$(elementSelect).before('<div class="do"></div>');
 		$(elementSelect.previousSibling).append('<h3>Faire</h3>');
@@ -224,8 +224,8 @@ function condition(){
 	$('#condition').on('click', function(){
 		$(elementSelect.previousSibling).removeClass('mouseOn');
 		elementSelect = "cliquer";
-		formatageProgramme();
 		conditionSi();
+		formatageProgramme();
 	});
 	/* Efface l'instruction Condition si le bouton n'a pas été activé */
 	$('#condition').on('mouseleave', function(){
@@ -332,10 +332,19 @@ function getElement(){
 	});
 }
 
+function validateForm(){
+	if(document.forms["form"]["data"].value == '' || document.forms["form"]["data"].value == NULL){
+		alert("Votre programme est vide !!!");
+		return false;
+	}else {
+		return true;
+	}
+}
+
 function formatageProgramme(){
 	$('input').on('keyup', function(){
 		var test = "";
-		var valeurForm = document.getElementById('programme');
+		var valeurForm = document.getElementById('formulaire');
 		for(var i=0; i<valeurForm.length; i++)
 		{
 			if(valeurForm.elements[i].className != "plus" && valeurForm.elements[i].id != "data" && valeurForm.elements[i].id != "title" && valeurForm.elements[i].className != "checkbox")
@@ -343,7 +352,7 @@ function formatageProgramme(){
 				test += valeurForm.elements[i].className.toUpperCase()
 				if(valeurForm.elements[i].value != "CLRTXT") test += ' ';
 				test += valeurForm.elements[i].value;
-				if(i < valeurForm.length-6)
+				if(i < valeurForm.length-7)
 				{
 					test += '#';
 				}
@@ -354,13 +363,13 @@ function formatageProgramme(){
 }
 
 function conditionSi(){
-	$('.si').on('focus', function(){
+	$('input[name=condition]').on('focus', function(){
 		var valeur = this.value;
 		if(!valeur.match(/^ *([a-zA-Z]+|[0-9]+) *(<|>|==|<=|>=|!=) *([a-zA-Z]+|[0-9]+) *$/) || !valeur.match(/^ *(".+"|[a-zA-Z]+) *(==|!=) *(".+"|[a-zA-Z]+) *$/)){
 			this.style.boxShadow = '0 0 30px red';
 		}
 	});
-	$('.si').on('keyup', function(){
+	$('input[name=condition]').on('keyup', function(){
 		var valeur = this.value;
 		if(valeur.match(/^ *([a-zA-Z]+|[0-9]+) *(<|>|==|<=|>=|!=) *([a-zA-Z]+|[0-9]+) *$/) || valeur.match(/^ *(".+"|[a-zA-Z]+) *(==|!=) *(".+"|[a-zA-Z]+) *$/)){
 			this.style.boxShadow = '0 0 15px lime';
@@ -368,7 +377,7 @@ function conditionSi(){
 			this.style.boxShadow = '0 0 30px red';
 		}
 	});
-	$('.si').on('blur', function(){
+	$('input[name=condition]').on('blur', function(){
 		var valeur = this.value;
 		if(valeur.match(/^ *([a-zA-Z]+|[0-9]+) *(<|>|==|<=|>=|!=) *([a-zA-Z]+|[0-9]+) *$/) || valeur.match(/^ *(".+"|[a-zA-Z]+) *(==|!=) *(".+"|[a-zA-Z]+) *$/)){
 			this.style.boxShadow = '0 0 0 white';
