@@ -2,6 +2,9 @@
 	<h2 id="titleMenu">Eléments</h2>
 	<button id="condition">Condition</button>
 	<button id="clearText">ClearText</button>
+	<button id="label">label</button>
+	<button id="goTo">Go To</button>
+	<button id="draw">draw</button>
 	<button id="set">Set (degrés/radian)</button>
 	<button id="afficher">Afficher</button>
 	<button id="calcul">Calculer</button>

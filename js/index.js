@@ -1,38 +1,67 @@
 $(init);
 
-/* Fonction d'initialisation */
+/* Fonction qui initilise le programmr */
 function init(){
 
-	// L'instruction condition n'est possible que sur les boucles donc pas sur un programme vierge
+	/* Initialisation de la page */
 	$('#condition').hide();
+	elementSelect = $('.plus').get(0);
 
-	// Initialisation des variables globales
-	var elementSelect = $('.plus').get(0);
+	/* Initialisation des fonctions */
+	ifThenElse();
+	whileDo();
+	forDo();
+	instructionShow();
+	calcul();
+	read();
+	condition();
+	set();
+	clearTxt();
 
-	/* Affichage de la structure If Else sur un passage de souris (hover) */
+
+	$('.plus').on('click', function(){
+		if(this.parentNode.className == 'if' || this.parentNode.className == 'while'){
+			hideButtons();
+			$('#condition').show();
+		}else{
+			hideButtons();
+			showButtons();
+		}
+		return false;
+	});
+
+	/* On enlève le menu lorsqu'un élément a été sélectionné */
+	$('#navLeft button').on('click', function(){
+		hideButtons();
+	});
+}
+
+
+/* Fonction global qui affiche la structure IfThenElse */
+function ifThenElse(){
 	$('#ifElse').on('mouseenter', function(){
-			$(elementSelect).before('<button class="plus">+</button>');
-			$(elementSelect).before('<div class="if"></div>');
-			$(elementSelect.previousSibling).append('<h3>Si</h3>');
-			$(elementSelect.previousSibling).append('<input type="text" name="#" class="si" placeholder="Si ...">');
-			$(elementSelect.previousSibling).append('<button class="plus">+</button>');
-			$(elementSelect).before('<div class="then"></div>');
-			$(elementSelect.previousSibling).append('<h3>Alors</h3>');
-			$(elementSelect.previousSibling).append('<button class="plus">+</button>');
-			$(elementSelect).before('<div class="else"></div>');
-			$(elementSelect.previousSibling).append('<h3>Sinon</h3>');
-			$(elementSelect.previousSibling).append('<button class="plus">+</button>');
-			$(elementSelect.previousSibling).addClass('mouseOn');
-			$(elementSelect.previousSibling.previousSibling).addClass('mouseOn');
-			$(elementSelect.previousSibling.previousSibling.previousSibling).addClass('mouseOn');
+		$(elementSelect).before('<button class="plus">+</button>');
+		$(elementSelect).before('<div class="if"></div>');
+		$(elementSelect.previousSibling).append('<h3>Si</h3>');
+		$(elementSelect.previousSibling).append('<input type="text" name="#" class="si" placeholder="Si ...">');
+		$(elementSelect.previousSibling).append('<button class="plus">+</button>');
+		$(elementSelect).before('<div class="then"></div>');
+		$(elementSelect.previousSibling).append('<h3>Alors</h3>');
+		$(elementSelect.previousSibling).append('<button class="plus">+</button>');
+		$(elementSelect).before('<div class="else"></div>');
+		$(elementSelect.previousSibling).append('<h3>Sinon</h3>');
+		$(elementSelect.previousSibling).append('<button class="plus">+</button>');
+		$(elementSelect.previousSibling).addClass('mouseOn');
+		$(elementSelect.previousSibling.previousSibling).addClass('mouseOn');
+		$(elementSelect.previousSibling.previousSibling.previousSibling).addClass('mouseOn');
 	});
 	/* Affichage de la structure If Else Then sur un click */
 	$('#ifElse').on('click', function(){
-			$(elementSelect.previousSibling).removeClass('mouseOn');
-			$(elementSelect.previousSibling.previousSibling).removeClass('mouseOn');
-			$(elementSelect.previousSibling.previousSibling.previousSibling).removeClass('mouseOn');
-			elementSelect = "cliquer";
-			conditionSi();
+		$(elementSelect.previousSibling).removeClass('mouseOn');
+		$(elementSelect.previousSibling.previousSibling).removeClass('mouseOn');
+		$(elementSelect.previousSibling.previousSibling.previousSibling).removeClass('mouseOn');
+		elementSelect = "cliquer";
+		conditionSi();
 	});
 	/* Efface la structure If Else si le bouton n'a pas été activé */
 	$('#ifElse').on('mouseleave', function(){
@@ -42,13 +71,12 @@ function init(){
 			$(elementSelect.previousSibling).remove();
 			$(elementSelect.previousSibling).remove();
 		}
+		getElement();
 	});
+}
 
-
-
-
-
-	/* Affichage de la boucle While sur un passage de souris (hover) */
+/* Fonction global qui affiche la strucutre while */
+function whileDo(){
 	$('#while').on('mouseenter', function(){
 		$(elementSelect).before('<button class="plus">+</button>');
 		$(elementSelect).before('<div class="while"></div>');
@@ -75,13 +103,11 @@ function init(){
 			$(elementSelect.previousSibling).remove();
 			$(elementSelect.previousSibling).remove();
 		}
+		getElement();
 	});
+}
 
-
-
-
-
-	/* Affichage de la boucle For sur un passage de souris (hover) */
+function forDo(){
 	$('#for').on('mouseenter', function(){
 		$(elementSelect).before('<button class="plus">+</button>');
 		$(elementSelect).before('<div class="for"></div>');
@@ -108,12 +134,11 @@ function init(){
 			$(elementSelect.previousSibling).remove();
 			$(elementSelect.previousSibling).remove();
 		}
+		getElement();
 	});
+}
 
-
-
-
-
+function instructionShow(){
 	/* Afficher l'instruction Affichage sur un passage de la souris */
 	$('#afficher').on('mouseenter', function(){
 		$(elementSelect).before('<button class="plus">+</button>');
@@ -132,12 +157,11 @@ function init(){
 			$(elementSelect.previousSibling).remove();
 			$(elementSelect.previousSibling).remove();
 		}
+		getElement();
 	});
+}
 
-
-
-
-
+function calcul(){
 	/* Afficher l'instruction Calcul sur un passage de la souris */
 	$('#calcul').on('mouseenter', function(){
 		$(elementSelect).before('<button class="plus">+</button>');
@@ -156,10 +180,11 @@ function init(){
 			$(elementSelect.previousSibling).remove();
 			$(elementSelect.previousSibling).remove();
 		}
+		getElement();
 	});
+}
 
-
-
+function read(){
 	var alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 
 	/* Afficher l'instruction Lire sur un passage de la souris */
@@ -184,12 +209,11 @@ function init(){
 			$(elementSelect.previousSibling).remove();
 			$(elementSelect.previousSibling).remove();
 		}
+		getElement();
 	});
+}
 
-
-
-
-
+function condition(){
 	/* Afficher l'instruction Condition sur un passage de la souris */
 	$('#condition').on('mouseenter', function(){
 		$(elementSelect).before('<button class="plus">+</button>');
@@ -201,6 +225,7 @@ function init(){
 		$(elementSelect.previousSibling).removeClass('mouseOn');
 		elementSelect = "cliquer";
 		formatageProgramme();
+		conditionSi();
 	});
 	/* Efface l'instruction Condition si le bouton n'a pas été activé */
 	$('#condition').on('mouseleave', function(){
@@ -208,12 +233,11 @@ function init(){
 			$(elementSelect.previousSibling).remove();
 			$(elementSelect.previousSibling).remove();
 		}
+		getElement();
 	});
+}
 
-
-
-
-
+function clearTxt(){
 	/* Afficher la fonction ClearText sur un passage de la souris */
 	$('#clearText').on('mouseenter', function(){
 		$(elementSelect).before('<button class="plus">+</button>');
@@ -234,12 +258,11 @@ function init(){
 			$(elementSelect.previousSibling).remove();
 			$(elementSelect.previousSibling).remove();
 		}
+		getElement();
 	});
+}
 
-
-
-
-
+function set(){
 	/* Afficher la fonction Set sur un passage de la souris */
 	$('#set').on('mouseenter', function(){
 		$(elementSelect).before('<button class="plus">+</button>');
@@ -259,49 +282,16 @@ function init(){
 			$(elementSelect.previousSibling).remove();
 			$(elementSelect.previousSibling).remove();
 		}
+		getElement();
 	});
-	
-
-	
-	
-
-
-	
-	/* On modifie le menu en fonction de l'élément sélectionné */
-	$('#navLeft button').on('click', function(){
-		
-		/* On affiche l'ecran de selection */
-		$('#titleMenu').html('Eléments');
-		hideButtons();
-
-		/* Evenement du bouton "plus" */
-		$('.plus').on('click', function(){
-			if(this.parentNode.className == 'if' || this.parentNode.className == 'while'){
-				hideButtons();
-				$('#condition').show();
-			}else if(this.parentNode.className == 'then' || this.parentNode.className == 'else' || this.parentNode.className == 'do' || this.parentNode.id == 'programme'){
-				hideButtons();
-				showButtons()
-			}
-			elementSelect = this;
-			return false;
-		});
-	});
-
-	$('#submit').on('click', function(){
-		if(1 == 1){
-			$('form').submit();
-		}else{
-
-		}
-	})
-
-	
 }
 
 /* Fonction pour masquer tout les buttons */
 function hideButtons(){
 	$('#clearText').hide();
+	$('#label').hide();
+	$('#goTo').hide();
+	$('#draw').hide();
 	$('#set').hide();
 	$('#afficher').hide();
 	$('#calcul').hide();
@@ -315,6 +305,9 @@ function hideButtons(){
 /* Fonction pour afficher les buttons récurents */
 function showButtons(){
 	$('#clearText').show();
+	$('#label').show();
+	$('#goTo').show();
+	$('#draw').show();
 	$('#set').show();
 	$('#afficher').show();
 	$('#calcul').show();
@@ -322,6 +315,21 @@ function showButtons(){
 	$('#ifElse').show();
 	$('#while').show();
 	$('#for').show();
+}
+
+/* Evenement du bouton "plus" */
+function getElement(){
+	$('.plus').on('click', function(){
+		if(this.parentNode.className == 'if' || this.parentNode.className == 'while'){
+			hideButtons();
+			$('#condition').show();
+		}else{
+			hideButtons();
+			showButtons();
+		}
+		elementSelect = this;
+		return false;
+	});
 }
 
 function formatageProgramme(){

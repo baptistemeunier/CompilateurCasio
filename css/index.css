@@ -68,6 +68,7 @@ form {
 	padding: 10px 20px;
 	background-color: #111;
 	color: #555;
+	border-top: 1px solid #00CED1;
 }
 label {
 	display: inline-block;

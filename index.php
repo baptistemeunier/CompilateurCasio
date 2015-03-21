@@ -16,7 +16,7 @@
 			<form method="post" action="traitement.php">
 				<input type="text" name="title" id="title" value="Nom du programme ?">
 				<div id="programme">
-					<button class="plus">+</button>
+					<button class="plus test">+</button>
 				</div>
 				<div id="footer">
 					<button id="submit">Validez</button>
