@@ -20,7 +20,7 @@
 				</div>
 				<div id="footer">
 					<button id="submit">Validez</button>
-					<input type="text" id="data" name="data" placeholder="variable test d'envoie">
+					<input type="hidden" id="data" name="data" placeholder="variable test d'envoie">
 					<label for="save_db">Sauvegarder le programme sur votre profil : </label>
 					<input type="checkbox" name="save_db" class="checkbox"><br>
 					<label for="save_txt">Exporter le programme en format txt : </label>
