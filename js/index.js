@@ -271,29 +271,15 @@ function init(){
 	$('#navLeft button').on('click', function(){
 		
 		/* On affiche l'ecran de selection */
-		$('#titleMenu').html('Veuillez saisir un element !!!');
+		$('#titleMenu').html('Eléments');
 		hideButtons();
 
 		/* Evenement du bouton "plus" */
 		$('.plus').on('click', function(){
 			if(this.parentNode.className == 'if' || this.parentNode.className == 'while'){
-				$('#titleMenu').html('Ajouter une condition');
 				hideButtons();
 				$('#condition').show();
-			}else if(this.parentNode.className == 'then'){
-				$('#titleMenu').html('Modifier le ALORS');
-				hideButtons();
-				showButtons()
-			}else if(this.parentNode.className == 'else'){
-				$('#titleMenu').html('Modifier le SINON');
-				hideButtons();
-				showButtons()
-			}else if(this.parentNode.className == 'do'){
-				$('#titleMenu').html('Modifier le FAIRE');
-				hideButtons();
-				showButtons()
-			}else if(this.parentNode.id == 'programme'){
-				$('#titleMenu').html('Ajouter au programme');
+			}else if(this.parentNode.className == 'then' || this.parentNode.className == 'else' || this.parentNode.className == 'do' || this.parentNode.id == 'programme'){
 				hideButtons();
 				showButtons()
 			}
@@ -303,7 +289,11 @@ function init(){
 	});
 
 	$('#submit').on('click', function(){
-		$('form').submit();
+		if(1 == 1){
+			$('form').submit();
+		}else{
+
+		}
 	})
 
 	
@@ -345,7 +335,7 @@ function formatageProgramme(){
 				test += valeurForm.elements[i].className.toUpperCase()
 				if(valeurForm.elements[i].value != "CLRTXT") test += ' ';
 				test += valeurForm.elements[i].value;
-				if(i < valeurForm.length-4)
+				if(i < valeurForm.length-6)
 				{
 					test += '#';
 				}

@@ -1,5 +1,5 @@
 <nav id="navLeft">
-	<h2 id="titleMenu">Premier élément</h2>
+	<h2 id="titleMenu">Eléments</h2>
 	<button id="condition">Condition</button>
 	<button id="clearText">ClearText</button>
 	<button id="set">Set (degrés/radian)</button>
@@ -11,5 +11,5 @@
 	<button id="for">Pour ... Faire ...</button>
 </nav>
 <nav id="navRight">
-	<h2>Help</h2>
+	<h2>Aide</h2>
 </nav>
