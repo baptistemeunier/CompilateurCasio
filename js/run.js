@@ -1,28 +1,66 @@
 $(init);
+var td = 0;
 var n = 0;
-var input;
+var input = "";
+var input_value_prev = "";
+var input_value = "";
 var si=-1;
 var si_max;
 var listeif;
 var n_instruction = liste_instruction.length;
 function init(){
 	run_instruction(liste_instruction[0]);
-	$('#next').on('click', function(){
+	$('#EXE').on('click', function(){
+		if(input != ''){
+			window[input] = parseFloat(input_value);
+			input = '';
+		}
+		if(td>5){
+			$("#"+ calc(td-6)).remove();
+		}
 		run_instruction();
 		return false;
 	});
-	$('#send').on('click', function(){
-		var value = $('#input').val();
-		if($.isNumeric(value)){
-			$("#text-console").append(value + "<br />");
-			window[input] = parseFloat(value);
-			run_instruction();
+	$('a').on('click', function(){
+		var value = $(this).text();
+		if(value == "S"){
+			instruction("Stop");
+			return false
+		}
+		if(value == "E" || input == '')
+			return false;
+		if(value == "D"){
+			$("#"+ calc(td)).empty();
+			$("#EXE").hide();
+			input_value = "0";
+			return false;
+		}
+		if(value == "-"){
+			$("#-").hide();
+			return false;
+		}
+		$("#EXE").show();
+		if(input_value == ""){
+			input_value = value;
+			if(td>5){
+				$("#"+ calc(td-5)).remove();
+			}
+			$("#text-console").append("<tr><td id="+ calc(td) +">" + input_value + "</td></tr>");
+			return false;
+		}else{
+			input_value = input_value + value;
+			$("#"+ calc(td)).append(value);
+			$("#EXE").show();
 		}
 		return false;
 	});
 }
-
 function run_instruction(){
+	if(n_instruction == n){
+		$("#text-console").append("Execution terminée");
+		instruction("Stop");
+	}
+	td++;
 	var k;
 	var liste = liste_instruction;
 	if(si == -1){
@@ -46,10 +84,6 @@ function run_instruction(){
 	}else{
 		si++;
 	}
-	if(n_instruction == n){
-		$("#text-console").append("Execution terminée");
-		instruction("Stop");
-	}
 	if(si_max == si){
 		listeif = null;
 		si = -1;
@@ -61,13 +95,13 @@ function run_instruction(){
 function afficher(params){
 	set();
 	if(typeof params['text'] != 'undefined'){
-		$("#text-console").append(params['text'] + "<br />");
+		$("#text-console").append("<tr><td id="+ td +'>' + params['text'] + "</td></tr>");
 		return false;
 	}
 	if(typeof params['var'] != 'undefined'){
-		$("#text-console").append(window[params['var']] + "<br />");
+		$("#text-console").append("<tr><td id="+ td +">" + window[params['var']] + "</td></tr>");
 		return false;
-	}		
+	}
 }
 
 function instruction(params){
@@ -77,9 +111,8 @@ function instruction(params){
 			$("#text-console").empty();
 		break;
 		case "Stop":
-			$("#next").hide();
-			$("#input").hide();
-			$("#send").hide();
+			$("#EXE").hide();
+			$("#text-console").text('                 Done');
 		break;
 	}
 }
@@ -87,7 +120,8 @@ function instruction(params){
 function lire(params){
 	set(true);
 	input = params['var'];
-	$("#text-console").append("> ");
+	$("#text-console").append("<tr><td id="+ td +">?</td></tr>");
+	td++;
 }
 
 function calcul(params) { 
@@ -103,13 +137,13 @@ function calcul(params) {
 
 function set(write){
 	if(write){
-		$("#next").hide();
+		$("#EXE").hide();
 		$("#input").show();
 		$("#send").show();
 	}else{
 		$("#input").hide();
 		$("#send").hide();
-		$("#next").show();
+		$("#EXE").show();
 	}
 }
 
@@ -132,12 +166,5 @@ function ifelse(params) {
 }
 
 function bouclewhile(params) {
-  //var condition = params['condition'].split("==");
-  //si = 0;
- // n++;
-  /*while(window[condition[0]] == parseFloat(condition[1])){
-	listeif = params['if']['instruction'];	
-  }
-  si_max = listeif.length;
-  run_instruction();*/
+
 }
