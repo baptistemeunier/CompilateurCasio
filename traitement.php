@@ -5,11 +5,14 @@ require "fonctionsdev.php";
 require "Class/Config.php";
 require "Class/Decode.php";
 require "Class/Code.php";
-require "Class/Run.php";
+//require "Class/Run.php"; Class deprecated depuis la version 0.3.0--alpha
 require "Class/Export.php";
 
 //$data = "AFFICHER Saisir A#LIRE A#WHILE A==1&AFFICHER A&LIRE A&AFFICHER PGM#AFFICHER Sorti";
-$data = "AFFICHER teTE#AFFICHER test#AFFICHER test#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisie A#LIRE A#CALCUL C=A+100#AFFICHER C = A+100 = #AFFICHER test#AFFICHER test#AFFICHER test#AFFICHER A";
+//$data = "AFFICHER teTE#AFFICHER test#AFFICHER test#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisie A#LIRE A#CALCUL C=A+100#AFFICHER C = A+100 = #AFFICHER test#AFFICHER test#AFFICHER test#AFFICHER A";
+$data = "AFFICHER Test si#SI A=0:AND B>1~AFFICHER dans le if~AFFICHER Toujours dans le if#SINON AFFICHER HOrs if~AFFICHER Toujours hors if#AFFICHER fin";
+//$data = "AFFICHER Test si#SI A=0:AND B>1~AFFICHER dans le if~AFFICHER Toujours dans le if#AFFICHER fin";
+
 if(isset($_POST['data'])){ // Si une données est envoyée
 	$data = $_POST['data'];
 }
@@ -48,37 +51,33 @@ if(empty($codepropre->erreur)){  // Si aucune erreur
 				</table>
 			</div>
 			<div class="input_test">
-				<a href='#'>7</a>
-				<a href='#'>8</a>
-				<a href='#'>9</a>
-				<a id="DEL" href='#'>D</a>
-				<a id="STOP" href='#'>S</a>
-				<br />
-				<a href='#'>4</a>
-				<a href='#'>5</a>
-				<a href='#'>6</a>
-				<br />
-				<a href='#'>1</a>
-				<a href='#'>2</a>
-				<a href='#'>3</a>
-				<br />
-				<a id="i0" href='#'>0</a>
-				<a id="." href='#'>.</a>
-				<a id="x" href='#'>x</a>
-				<a id="-" href='#'>-</a>
-				<a id="EXE" href='#'>E</a>
-			</div>
-			<!--<h2>Testez votre programme !</h2>
-			<div class="console">
-				<p id="text-console"></p>
-			</div>
-			<div class="input">
-				<form>
-					<input type="number" id="input">
-					<button id="send">Send</button>
-				</form>
-				<button id="next">Next</button>
-			</div>-->
+			<table cellspacing="10" class="input">
+				<tr>
+					<td id="7"></td>
+					<td id="8"></td>
+					<td id="9"></td>
+					<td id="D"></td>
+					<td id="S"></td>
+				</tr>
+				<tr>
+					<td id="4"></td>
+					<td id="5"></td>
+					<td id="6"></td>
+				</tr>
+				<tr>
+					<td id="1"></td>
+					<td id="2"></td>
+					<td id="3"></td>
+				</tr>
+				<tr>
+					<td id="0"></td>
+					<td id="."></td>
+					<th></th>
+					<th></th>
+					<td id="EXE"></td>
+				</tr>
+			</table>
+			 </div>
 		</section>
 		<section id="code">
 			<h2>Votre programme au format CASIO</h2>

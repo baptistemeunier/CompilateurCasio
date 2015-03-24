@@ -4,6 +4,12 @@
 }
 html{
 	font-family: 'Open Sans', sans-serif;
+}
+.input td{
+	background-color: grey;
+	opacity: 0.4;
+	width: 1200px;
+	height: 65px;
 }/*
 #console{
 	margin-left: 100px;
@@ -61,7 +67,7 @@ html{
 	color:#000;
 }
 .input_test{
-	margin-left: 115px;
+	margin-left: 95px;
 	text-transform: uppercase;
 	font-size: 1.25em;
 	letter-spacing: 35px;
