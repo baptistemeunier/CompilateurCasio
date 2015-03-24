@@ -78,9 +78,16 @@ class Decode{
 	 * @return void
 	 **/
 	private function instruction($fonction){
-			$this->decode[] = array('fonction' => 'instruction',
+			return array('fonction' => 'instruction',
 									'params' => ucfirst(strtolower($fonction)));
 	}
+	/**
+	 * Function ifelse
+	 *
+	 * Ajoute l'instruction if/else à la liste des insctructions
+	 * @param String $fonction La fonction à ajouté et les parametres
+	 * @return void
+	 **/
 	private function ifelse($params, $si){
 		$params = ($si==true)?substr($params, 3):substr($params, 6);
 		$params = explode("~", $params);
@@ -93,6 +100,13 @@ class Decode{
 		}else{
 			$add['params']['sinon'] = $this->ajout($params);
 		}
+		return $add;
+	}
+	private function bouclewhile($params){
+		$params = explode("&", $params);
+		$conditions = explode(":", $params[0]);
+		unset($params[0]);
+		$add = array('fonction' => 'bouclewhile', 'params' => array('conditions' => $conditions, 'instructions' => $this->ajout($params)));
 		return $add;
 	}
 	/**
