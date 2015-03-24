@@ -76,6 +76,13 @@ class Code{
 	function set($params){
 		$this->code .= $params['set']."\n";
 	}
+	/**
+	 * Function ifelse
+	 *
+	 * Traduire un Array ifelse en casio
+	 * @param Array $params parametre de la fonction
+	 * @return void
+	 **/
 	function ifelse($params){
 		debug($params);
 		if(isset($params['si'])){
@@ -97,11 +104,20 @@ class Code{
 			$this->si = 0;
 		}
 	}
+	/**
+	 * Function ifelse
+	 *
+	 * Traduire un Array while en casio
+	 * @param Array $params parametre de la fonction
+	 * @return void
+	 **/
 	function bouclewhile($params){
-		$this->code .= "While ".$params['condition']."\n";
-		foreach ($params['instruction'] as $instruction) {
+		$this->code .= "While ";
+		foreach ($params['conditions'] as $value)
+			$this->code .= $value." ";
+		$this->code .= "\n";
+		foreach ($params['instructions'] as $instruction)
 			$this->$instruction['fonction']($instruction['params']);
-		}
 		$this->code .= "WhileEnd\n";
 	}
 }
