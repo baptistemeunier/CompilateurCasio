@@ -6,15 +6,18 @@
  *
  * @param Array $data Tableau des insctructions
  * @author Baptiste Meunier baptiste.meunier0@gmail.com
- * @version 0.3.0--alpha
+ * @version 0.6.0--alpha
  **/
 
 class Code{
 	public $code; // Le programme en Casio
+	private $si = 0;
 
 	function __construct($data){
 		$this->code = "0->A~Z\n";                                    // Initialisations des variables 
 		foreach ($data as $inctruction){                             // Pour chaque instruction
+			if($this->si!=0 && $inctruction['fonction']!="ifelse")
+				$this->code .= "IfEnd\n";
 			$this->$inctruction['fonction']($inctruction['params']); // Lancer la fonction qui traduit
 		}
 	}
@@ -74,15 +77,25 @@ class Code{
 		$this->code .= $params['set']."\n";
 	}
 	function ifelse($params){
-		$this->code .= "If ".$params['if']['condition']."\nThen ";
-		foreach ($params['if']['instruction'] as $inctruction) {
-			$this->$inctruction['fonction']($inctruction['params']);
+		debug($params);
+		if(isset($params['si'])){
+			$this->code .= "If ";
+			foreach ($params['conditions'] as $value) {
+				$this->code .= $value." ";
+			}
+			$this->code .= "\nThen ";
+			foreach ($params['si'] as $inctruction) {
+					$this->$inctruction['fonction']($inctruction['params']);
+			}
+			$this->si = 1;
+		}else{
+			$this->code .= "Else ";
+			foreach ($params['sinon'] as $inctruction) {
+					$this->$inctruction['fonction']($inctruction['params']);
+			}
+			$this->code .= "IfEnd\n";
+			$this->si = 0;
 		}
-		$this->code .= "Else ";
-		foreach ($params['else'] as $inctruction) {
-			$this->$inctruction['fonction']($inctruction['params']);
-		}
-		$this->code .= "IfEnd\n";
 	}
 	function bouclewhile($params){
 		$this->code .= "While ".$params['condition']."\n";

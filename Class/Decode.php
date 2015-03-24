@@ -5,7 +5,7 @@
  * Permet d'analyser le code fourni par l'utilisateur
  * @param String $data Text brut des instructions entrées par l'utilisateur
  * @author Baptiste Meunier baptiste.meunier0@gmail.com
- * @version 1.0
+ * @version 0.6.0--alpha
  **/
 class Decode{
 
@@ -21,6 +21,16 @@ class Decode{
 
 	function __construct($data){
 		$inctructions = explode("#", $data);      // On recupere les instuctions une par une (Qui sont sepater par un diese)
+		$this->decode = $this->ajout($inctructions);
+	}
+	/**
+	 * Function ajout
+	 *
+	 * Retourne la liste d'insctuction formaté
+	 * @param Array $inctructions Le tableau brut des insctructions
+	 * @return Array $decode liste d'insctuction formaté
+	 **/
+	private function ajout($inctructions){
 		foreach ($inctructions as $instruction) { // Pour chaque instruction
 			foreach ($this->fonction_simple as $fonction) { // Si c'est une instruction simple
 				if($instruction == $fonction){
@@ -34,14 +44,16 @@ class Decode{
 					break;
 				}
 			}
-			if(substr($instruction, 0, 2)=="IF"){
-				$add = $this->condition($instruction);
+			if(substr($instruction, 0, 2)=="SI"){
+				$si = (substr($instruction, 0, 5)=="SINON")?false:true;
+				$add = $this->ifelse($instruction, $si);
 			}
 			if(substr($instruction, 0, 5)=="WHILE"){
 				$add = $this->bouclewhile($instruction);
 			}
-			$this->decode[] = $add;
+			$decode[] = $add;
 		}
+		return $decode;
 	}
 	/**
 	 * Function varAdd
@@ -69,88 +81,20 @@ class Decode{
 			$this->decode[] = array('fonction' => 'instruction',
 									'params' => ucfirst(strtolower($fonction)));
 	}
-	private function condition($params){
+	private function ifelse($params, $si){
+		$params = ($si==true)?substr($params, 3):substr($params, 6);
 		$params = explode("~", $params);
-		$params[0] = explode(" ", $params[0]);
-		$condition = $params[0][1];
-		unset($params[0]);
-		foreach ($params as $k => $instruc) { // Pour chaque instruction
-			unset($params[$k]);
-			if($instruc == "ELSE"){
-				break 1;
-			}
-			foreach ($this->fonction_simple as $fonction) { // Si c'est une instruction simple
-				if($instruc == $fonction){
-					$if[] = $this->instruc($fonction); // Ajouts de l'instructions
-					break;
-				}
-			}
-			foreach ($this->fonction_match as $match => $fonction) { // Si c'est une fonction complexe
-				if(preg_match($match, $instruc, $find)){
-					$if[] = $this->$fonction($find[1]); // Ajouts de l'instructions
-					break;
-				}
-			}
-			if(substr($instruc, 0, 2)=="IF"){
-				//$this->condition($instruc);
-			}
+		$add = array('fonction' => 'ifelse');
+		if($si == true){
+			$conditions = explode(":", $params[0]);
+			unset($params[0]);
+			$add['params']['conditions'] = $conditions;
+			$add['params']['si'] = $this->ajout($params);
+		}else{
+			$add['params']['sinon'] = $this->ajout($params);
 		}
-		foreach ($params as $instruc) { // Pour chaque instruction
-			if($instruc == "ELSE"){
-				break 1;
-			}
-			foreach ($this->fonction_simple as $fonction) { // Si c'est une instruction simple
-				if($instruc == $fonction){
-					$else[] = $this->instruc($fonction); // Ajouts de l'instructions
-					break;
-				}
-			}
-			foreach ($this->fonction_match as $match => $fonction) { // Si c'est une fonction complexe
-				if(preg_match($match, $instruc, $find)){
-					$else[] = $this->$fonction($find[1]); // Ajouts de l'instructions
-					break;
-				}
-			}
-			if(substr($instruc, 0, 2)=="IF"){
-				//$this->condition($instruc);
-			}
-		}
-			return array('fonction' => 'ifelse',
-						 'params' => array('if' =>	array('condition' => $condition,
-														'instruction' => $if),
-						 					'else' => $else));
+		return $add;
 	}
-	private function bouclewhile($params){
-		$params = explode("&", $params);
-		$params[0] = explode(" ", $params[0]);
-		$condition = $params[0][1];
-		unset($params[0]);
-		foreach ($params as $k => $instruc) { // Pour chaque instruction
-			unset($params[$k]);
-			if($instruc == "ELSE"){
-				break 1;
-			}
-			foreach ($this->fonction_simple as $fonction) { // Si c'est une instruction simple
-				if($instruc == $fonction){
-					$while[] = $this->instruc($fonction); // Ajouts de l'instructions
-					break;
-				}
-			}
-			foreach ($this->fonction_match as $match => $fonction) { // Si c'est une fonction complexe
-				if(preg_match($match, $instruc, $find)){
-					$while[] = $this->$fonction($find[1]); // Ajouts de l'instructions
-					break;
-				}
-			}
-			if(substr($instruc, 0, 2)=="IF"){
-				//$this->condition($instruc);
-			}
-		}
-		return array('fonction' => 'bouclewhile',
-					 'params' => array('condition' => $condition,
-					 'instruction' => $while));
-	}
-
 	/**
 	 * Function afficher
 	 *
