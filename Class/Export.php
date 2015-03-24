@@ -6,7 +6,6 @@
  * @param String $code_recu Code brut |String $code_recu Code casio | Array $options les options de savaugarde
  * @author Baptiste Meunier baptiste.meunier0@gmail.com
  * @version 0.3.0--alpha
- * @deprecated 0.3.0--alpha Code passé en JavaScript
  **/
  
 Class Export{

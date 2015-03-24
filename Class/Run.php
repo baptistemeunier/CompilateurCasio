@@ -6,6 +6,7 @@
  * @param Array $data Tableau des insctructions| Array $var liste des variables
  * @author Baptiste Meunier baptiste.meunier0@gmail.com
  * @version 0.3.0--alpha
+ * @deprecated 0.3.0--alpha Code passé en JavaScript
  **/
 class Run{
 
