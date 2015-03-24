@@ -1,6 +1,10 @@
+@font-face {
+    font-family: "Casio";
+    src: url('../img/casiofx.ttf');
+}
 html{
 	font-family: 'Open Sans', sans-serif;
-}
+}/*
 #console{
 	margin-left: 100px;
 	width: 500px;
@@ -9,23 +13,67 @@ html{
 	color: #FFF;
 	padding: 20px;
 	float: left;
+}*/
+#console{
+	margin-left: 100px;
+	width: 680px;
+	height: 1280px;
+	background-image: url("../img/casio.jpg");
+	background-repeat: no-repeat;
+	color: #FFF;
+	padding: 20px;
+	float: left;
 }
 #code{
 	margin-left: 640px;
 	margin-top: 50px;
-	width: 500px;
-	height: 380px;
+	/*width: 500px;
+	height: 380px;*/
 	background-color: #F4A460;
 	color: #FFF;
 	padding: 20px;
 }
 #save{
 	margin-left: 640px;
-	width: 500px;
-	height: 380px;
+	/*width: 500px;
+	height: 380px;*/
 	background-color: grey;
 	color: #FFF;
 	padding: 20px;
+}
+/*#EXE{
+	margin-left: 475px;
+	/*width: 500px;
+	height: 380px;*/
+	/*background-color: grey;
+	color: #FFF;
+	padding: 20px;*
+}*/
+.console_test{
+	margin-top: 150px;
+	margin-left: 140px;
+	text-transform: uppercase;
+	font-size: 1.8em;
+	letter-spacing: 6px;
+	line-height: 30px;
+	width: 500px;
+	height: 670px;
+	color:#000;
+}
+.input_test{
+	margin-left: 115px;
+	text-transform: uppercase;
+	font-size: 1.25em;
+	letter-spacing: 35px;
+	line-height: 75px;
+	width: 400px;
+	height: 695px;
+	color:blue;
+}
+#console a{
+	background-color: grey;
+	text-decoration: none;
+	color: #66F460;
 }
 .console{
 	width: 500px;
