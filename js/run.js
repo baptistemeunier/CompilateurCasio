@@ -1,3 +1,12 @@
+/**
+ * Fichier JS run.js
+ *
+ * Permet de simuler la calculette
+ *
+ * @author Baptiste Meunier baptiste.meunier0@gmail.com
+ * @version 0.6.0--alpha
+ **/
+
 $(init);
 var td = 0;
 var n = 0;
@@ -21,22 +30,18 @@ function init(){
 		run_instruction();
 		return false;
 	});
-	$('a').on('click', function(){
-		var value = $(this).text();
+	$('td').on('click', function(){
+		var value = $(this).attr('id');
 		if(value == "S"){
 			instruction("Stop");
 			return false
 		}
-		if(value == "E" || input == '')
+		if(value == "EXE" || input == '')
 			return false;
 		if(value == "D"){
 			$("#"+ calc(td)).empty();
 			$("#EXE").hide();
 			input_value = "0";
-			return false;
-		}
-		if(value == "-"){
-			$("#-").hide();
 			return false;
 		}
 		$("#EXE").show();
@@ -153,7 +158,15 @@ function calc(calcul) {
 }
 
 function ifelse(params) {
-  var condition = params['if']['condition'].split("=");
+	var conditions = params['conditions'];
+	if(typeof conditions['si'] != "undefined"){
+		console.log(conditions);
+		for (var i = 0; i < conditions.length; i++) {
+
+			console.log(conditions[i]);
+		};
+	}
+  /*
   si = 0;
   n++;
   if(window[condition[0]] == parseFloat(condition[1])){
@@ -163,6 +176,7 @@ function ifelse(params) {
   }
   si_max = listeif.length;
   run_instruction();
+  */
 }
 
 function bouclewhile(params) {
