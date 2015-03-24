@@ -49,7 +49,7 @@ class Decode{
 				$add = $this->ifelse($instruction, $si);
 			}
 			if(substr($instruction, 0, 5)=="WHILE"){
-				$add = $this->bouclewhile($instruction);
+				$add = $this->bouclewhile(substr($instruction, 6));
 			}
 			$decode[] = $add;
 		}
@@ -85,8 +85,8 @@ class Decode{
 	 * Function ifelse
 	 *
 	 * Ajoute l'instruction if/else à la liste des insctructions
-	 * @param String $fonction La fonction à ajouté et les parametres
-	 * @return void
+	 * @param String $params les texte brut Boolean $si true si on est dans un if sinon false
+	 * @return Array $add Tableau des parametre du if
 	 **/
 	private function ifelse($params, $si){
 		$params = ($si==true)?substr($params, 3):substr($params, 6);
@@ -102,6 +102,14 @@ class Decode{
 		}
 		return $add;
 	}
+
+	/**
+	 * Function ifelse
+	 *
+	 * Ajoute l'instruction while à la liste des insctructions
+	 * @param String $params les texte brut
+	 * @return Array $add Tableau des parametre du while
+	 **/
 	private function bouclewhile($params){
 		$params = explode("&", $params);
 		$conditions = explode(":", $params[0]);
