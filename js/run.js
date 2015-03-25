@@ -25,7 +25,7 @@ function init(){
 			input = '';
 		}
 		if(td>5){
-			$("#"+ calc(td-6)).remove();
+			$("#i"+ calc(td-6)).remove();
 		}
 		run_instruction();
 		return false;
@@ -48,7 +48,7 @@ function init(){
 		if(input_value == ""){
 			input_value = value;
 			if(td>5){
-				$("#"+ calc(td-5)).remove();
+				$("#i"+ calc(td-5)).remove();
 			}
 			$("#text-console").append("<tr><td id="+ calc(td) +">" + input_value + "</td></tr>");
 			return false;
@@ -100,11 +100,11 @@ function run_instruction(){
 function afficher(params){
 	set();
 	if(typeof params['text'] != 'undefined'){
-		$("#text-console").append("<tr><td id="+ td +'>' + params['text'] + "</td></tr>");
+		$("#text-console").append("<tr><td id=i"+ td +'>' + params['text'] + "</td></tr>");
 		return false;
 	}
 	if(typeof params['var'] != 'undefined'){
-		$("#text-console").append("<tr><td id="+ td +">" + window[params['var']] + "</td></tr>");
+		$("#text-console").append("<tr><td id=i"+ td +">" + window[params['var']] + "</td></tr>");
 		return false;
 	}
 }
@@ -125,7 +125,7 @@ function instruction(params){
 function lire(params){
 	set(true);
 	input = params['var'];
-	$("#text-console").append("<tr><td id="+ td +">?</td></tr>");
+	$("#text-console").append("<tr><td id=i"+ td +">?</td></tr>");
 	td++;
 }
 

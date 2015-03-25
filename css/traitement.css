@@ -5,6 +5,9 @@
 html{
 	font-family: 'Open Sans', sans-serif;
 }
+.input{
+	width: 445px;
+}
 .input td{
 	background-color: grey;
 	opacity: 0.4;
