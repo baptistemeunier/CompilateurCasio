@@ -48,9 +48,12 @@ class Decode{
 				$si = (substr($instruction, 0, 5)=="SINON")?false:true;
 				$add = $this->ifelse($instruction, $si);
 			}
-			if(substr($instruction, 0, 5)=="WHILE"){
+			if(substr($instruction, 0, 5)=="WHILE")
 				$add = $this->bouclewhile(substr($instruction, 6));
-			}
+			if(substr($instruction, 0, 3)=="FOR")
+				$add = $this->bouclefor(substr($instruction, 4));
+			if(substr($instruction, 0, 7)=="DOWHILE")
+				$add = $this->bouclefor(substr($instruction, 8));
 			$decode[] = $add;
 		}
 		return $decode;
@@ -102,9 +105,8 @@ class Decode{
 		}
 		return $add;
 	}
-
 	/**
-	 * Function ifelse
+	 * Function bouclewhile
 	 *
 	 * Ajoute l'instruction while à la liste des insctructions
 	 * @param String $params les texte brut
@@ -115,6 +117,35 @@ class Decode{
 		$conditions = explode(":", $params[0]);
 		unset($params[0]);
 		$add = array('fonction' => 'bouclewhile', 'params' => array('conditions' => $conditions, 'instructions' => $this->ajout($params)));
+		return $add;
+	}
+	/**
+	 * Function bouclefor
+	 *
+	 * Ajoute l'instruction for à la liste des insctructions
+	 * @param String $params les texte brut
+	 * @return Array $add Tableau des parametre du while
+	 **/
+	private function bouclefor($params){
+		$params = explode("%", $params);
+		$conditions = explode(":", $params[0]);
+		unset($params[0]);
+		$add = array('fonction' => 'bouclefor', 'params' => array('pour' => $conditions[0],
+		'a' => $conditions[1], 'step' => $conditions[2], 'instructions' => $this->ajout($params)));
+		return $add;
+	}
+	/**
+	 * Function boucledo
+	 *
+	 * Ajoute l'instruction do à la liste des insctructions
+	 * @param String $params les texte brut
+	 * @return Array $add Tableau des parametre du while
+	 **/
+	private function boucledo($params){
+		$params = explode("$", $params);
+		$conditions = explode(":", $params[0]);
+		unset($params[0]);
+		$add = array('fonction' => 'boucledo', 'params' => array('conditions' => $conditions, 'instructions' => $this->ajout($params)));
 		return $add;
 	}
 	/**

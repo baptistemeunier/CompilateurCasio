@@ -105,7 +105,37 @@ class Code{
 		}
 	}
 	/**
-	 * Function ifelse
+	 * Function bouclefor
+	 *
+	 * Traduire un Array while en casio
+	 * @param Array $params parametre de la fonction
+	 * @return void
+	 **/
+	function bouclefor($params){
+		$pour = explode("=", $params['conditions']['pour']);
+		$this->code .= "For ".$pour[1]."->".$pour[0]." To ".$params['conditions']['a']." Step ".$params['conditions']['step']."\n";
+		foreach ($params['instructions'] as $instruction)
+			$this->$instruction['fonction']($instruction['params']);
+		$this->code .= "Next\n";
+	}
+	/**
+	 * Function boucledo
+	 *
+	 * Traduire un Array Do/while en casio
+	 * @param Array $params parametre de la fonction
+	 * @return void
+	 **/
+	function boucledo($params){
+		$this->code .= "Do ";
+		foreach ($params['conditions'] as $value)
+			$this->code .= $value." ";
+		$this->code .= "LpWhile ";
+		foreach ($params['instructions'] as $instruction)
+			$this->$instruction['fonction']($instruction['params']);
+		$this->code .= "\n";
+	}
+	/**
+	 * Function bouclewhile
 	 *
 	 * Traduire un Array while en casio
 	 * @param Array $params parametre de la fonction
