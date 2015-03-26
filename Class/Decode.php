@@ -15,7 +15,9 @@ class Decode{
 	private $fonction_match  = array("~^CALCUL (.+)$~" => "calcul",
 							   		 "~^LIRE (.+)$~" => "lire",
 							   		 "~^AFFICHER (.+)$~" => "afficher",
-							   		 "~^SET (.+)$~" => "set"
+							   		 "~^SET (.+)$~" => "set",
+							   		 "~^GOTO ([0-9]+)$~" => "sautgoto",
+							   		 "~^LABEL ([0-9]+)$~" => "sautlabel",
 							   );   // Liste des fonction
 	private $fonction_simple = array("STOP", "CLRTXT"); // Liste des instructions
 
@@ -83,6 +85,28 @@ class Decode{
 	private function instruction($fonction){
 			return array('fonction' => 'instruction',
 									'params' => ucfirst(strtolower($fonction)));
+	}
+	/**
+	 * Function sautgoto
+	 *
+	 * Ajoute l'instruction Goto à la liste des insctructions
+	 * @param id $saut le type de saut
+	 * @return Array Tableau des parametre du saut
+	 **/
+	private function sautgoto($saut){
+			return array('fonction' => 'saut',
+						'params' => array("goto" => intval($saut)));
+	}
+	/**
+	 * Function sautlabel
+	 *
+	 * Ajoute l'instruction Label à la liste des insctructions
+	 * @param id $saut le type de saut
+	 * @return Array Tableau des parametre du saut
+	 **/
+	private function sautlabel($saut){
+			return array('fonction' => 'saut',
+						'params' => array("label" =>  intval($saut)));
 	}
 	/**
 	 * Function ifelse

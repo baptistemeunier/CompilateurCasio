@@ -57,6 +57,19 @@ class Code{
 		$this->code .= "?->$var\n";
 	}
 	/**
+	 * Function saut
+	 *
+	 * Traduire un instruction de saut en casio
+	 * @param Array $params valeur et type de saut
+	 * @return void
+	 **/
+	function saut($params){
+		if(isset($params['goto']))
+			$this->code .= "Goto ".$params['goto']."\n";
+		else
+			$this->code .= "Lbl ".$params['label']."\n";
+	}
+	/**
 	 * Function calcul
 	 *
 	 * Traduire un instruction calcul en casio
