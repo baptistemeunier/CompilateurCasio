@@ -24,7 +24,7 @@ class Code{
 	/**
 	 * Function instruction
 	 *
-	 * Traduire un instruction simple en casio
+	 * Traduire une instruction simple en casio
 	 * @param Array $params parametre de la fonction
 	 * @return void
 	 **/
@@ -34,7 +34,7 @@ class Code{
 	/**
 	 * Function afficher
 	 *
-	 * Traduire un instruction afficher en casio
+	 * Traduire une instruction afficher en casio
 	 * @param Array $params parametre de la fonction
 	 * @return void
 	 **/
@@ -48,7 +48,7 @@ class Code{
 	/**
 	 * Function lire
 	 *
-	 * Traduire un instruction lire en casio
+	 * Traduire une instruction lire en casio
 	 * @param Array $params parametre de la fonction
 	 * @return void
 	 **/
@@ -59,7 +59,7 @@ class Code{
 	/**
 	 * Function saut
 	 *
-	 * Traduire un instruction de saut en casio
+	 * Traduire une instruction de saut en casio
 	 * @param Array $params valeur et type de saut
 	 * @return void
 	 **/
@@ -70,9 +70,25 @@ class Code{
 			$this->code .= "Lbl ".$params['label']."\n";
 	}
 	/**
+	 * Function menu
+	 *
+	 * Traduire une instruction menu en casio
+	 * @param Array $params parametre de la fonction
+	 * @return void
+	 **/
+	function menu($params){
+		debug($params);
+		$this->code .= 'Menu "'.$params['titre'].'"';
+		foreach ($params['menu'] as $value) {
+			debug($value);
+			$this->code .= ','.$value['go'].',"'.$value['nom'].'"';
+		}
+		$this->code .= "\n";
+	}
+	/**
 	 * Function calcul
 	 *
-	 * Traduire un instruction calcul en casio
+	 * Traduire une instruction calcul en casio
 	 * @param Array $params parametre de la fonction
 	 * @return void
 	 **/

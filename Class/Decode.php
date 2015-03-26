@@ -16,8 +16,9 @@ class Decode{
 							   		 "~^LIRE (.+)$~" => "lire",
 							   		 "~^AFFICHER (.+)$~" => "afficher",
 							   		 "~^SET (.+)$~" => "set",
-							   		 "~^GOTO ([0-9]+)$~" => "sautgoto",
-							   		 "~^LABEL ([0-9]+)$~" => "sautlabel",
+							   		 "~^GOTO (.+)$~" => "sautgoto",
+							   		 "~^LABEL (.+)$~" => "sautlabel",
+							   		 "~^MENU (.+)$~" => "menu",
 							   );   // Liste des fonction
 	private $fonction_simple = array("STOP", "CLRTXT"); // Liste des instructions
 
@@ -90,12 +91,30 @@ class Decode{
 	 * Function sautgoto
 	 *
 	 * Ajoute l'instruction Goto à la liste des insctructions
-	 * @param id $saut le type de saut
+	 * @param string $saut le type de saut
 	 * @return Array Tableau des parametre du saut
 	 **/
 	private function sautgoto($saut){
 			return array('fonction' => 'saut',
-						'params' => array("goto" => intval($saut)));
+						'params' => array("goto" => $saut));
+	}
+	/**
+	 * Function menu
+	 *
+	 * Ajoute l'instruction menu à la liste des insctructions
+	 * @param string $params les parametre du menu
+	 * @return Array Tableau des parametres du menu
+	 **/
+	private function menu($params){
+			$params = explode("~", $params);
+			$titre = $params[0];
+			$menu = array();
+			unset($params[0]);
+			for($i=1; $i < count($params); $i=$i+2){
+				$menu[] = array('go' => $params[$i], 'nom' => $params[$i+1]);
+			}
+			return array('fonction' => 'menu',
+						'params' => array("titre" => $titre, 'menu' => $menu));
 	}
 	/**
 	 * Function sautlabel
@@ -106,7 +125,7 @@ class Decode{
 	 **/
 	private function sautlabel($saut){
 			return array('fonction' => 'saut',
-						'params' => array("label" =>  intval($saut)));
+						'params' => array("label" =>  $saut));
 	}
 	/**
 	 * Function ifelse
