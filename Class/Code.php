@@ -77,12 +77,9 @@ class Code{
 	 * @return void
 	 **/
 	function menu($params){
-		debug($params);
 		$this->code .= 'Menu "'.$params['titre'].'"';
-		foreach ($params['menu'] as $value) {
-			debug($value);
+		foreach ($params['menu'] as $value)
 			$this->code .= ','.$value['go'].',"'.$value['nom'].'"';
-		}
 		$this->code .= "\n";
 	}
 	/**
