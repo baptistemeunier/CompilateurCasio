@@ -114,6 +114,7 @@ function instruction(params){
 	switch(params){
 		case "Clrtxt":
 			$("#text-console").empty();
+			td = 0;
 		break;
 		case "Stop":
 			$("#EXE").hide();
