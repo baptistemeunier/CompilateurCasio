@@ -9,12 +9,12 @@ require "Class/Code.php";
 require "Class/Export.php";
 
 //$data = "AFFICHER Saisir A#LIRE A#WHILE A==1&AFFICHER A&LIRE A&AFFICHER PGM#AFFICHER Sorti";
-//$data = "AFFICHER teTE#AFFICHER test#AFFICHER test#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisie A#LIRE A#CALCUL C=A+100#AFFICHER C = A+100 = #AFFICHER test#AFFICHER test#AFFICHER test#AFFICHER A";
-$data = "AFFICHER Test si#SI A=0:AND B>1~AFFICHER dans le if~AFFICHER Toujours dans le if#SINON AFFICHER HOrs if~AFFICHER Toujours hors if#AFFICHER fin";
+$data = "AFFICHER teTE#MENU Test~1~Valeur 1~2~Hello~6~Valeur 10#GOTO 0#LABEL 0#AFFICHER test#AFFICHER test#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisie A#LIRE A#CALCUL C=A+100#AFFICHER C = A+100 = #AFFICHER test#AFFICHER test#AFFICHER test#AFFICHER A";
+//$data = "AFFICHER Test si#SI A=0:AND B>1~AFFICHER dans le if~AFFICHER Toujours dans le if#SINON AFFICHER HOrs if~AFFICHER Toujours hors if#AFFICHER fin";
 //$data = "AFFICHER Test si#SI A=0:AND B>1~AFFICHER dans le if~AFFICHER Toujours dans le if#AFFICHER fin";
 
 if(isset($_POST['data'])){ // Si une données est envoyée
-	$data = $_POST['data'];
+	$data = trim($_POST['data']);
 }
 $export['titre'] = isset($_POST['title'])?$_POST['title']:md5(sha1(rand()));
 $export['save_db'] = isset($_POST['save_db'])?true:false;
@@ -46,35 +46,55 @@ if(empty($codepropre->erreur)){  // Si aucune erreur
 	<body>
 		<section id="console">
 			<div class="console_test">
-				<table id="text-console">
-
+				<table class="affichage">
+					<tr>
+						<td class="ligne" id="a1">Une ligne normal FIN!</td>		
+					</tr>
+					<tr>
+						<td class="ligne" id="a2">Une ligne normal FIN!</td>
+					</tr>
+					<tr>
+						<td class="ligne" id="a3">Une ligne normal FIN!</td>		
+					</tr>
+					<tr>
+						<td class="ligne" id="a4">Une ligne normal FIN!</td>		
+					</tr>
+					<tr>
+						<td class="ligne" id="a5">Une ligne normal FIN!</td>		
+					</tr>
+					<tr>
+						<td class="ligne" id="a6">Une ligne normal FIN!</td>		
+					</tr>
+					<tr>
+						<td class="ligne" id="a7">Une ligne normal FIN!</td>		
+					</tr>
 				</table>
 			</div>
 			<div class="input_test">
 			<table cellspacing="10" class="input">
 				<tr>
-					<td id="7"></td>
-					<td id="8"></td>
-					<td id="9"></td>
-					<td id="D"></td>
-					<td id="S"></td>
+					<td class="input" id="7"></td>
+					<td class="input" id="8"></td>
+					<td class="input" id="9"></td>
+					<td class="input" id="DEL"></td>
+					<td class="input" id="AC"></td>
 				</tr>
 				<tr>
-					<td id="4"></td>
-					<td id="5"></td>
-					<td id="6"></td>
+					<td class="input" id="4"></td>
+					<td class="input" id="5"></td>
+					<td class="input" id="6"></td>
 				</tr>
 				<tr>
-					<td id="1"></td>
-					<td id="2"></td>
-					<td id="3"></td>
+					<td class="input" id="1"></td>
+					<td class="input" id="2"></td>
+					<td class="input" id="3"></td>
 				</tr>
 				<tr>
-					<td id="0"></td>
-					<td id="."></td>
+					<td class="input" id="0"></td>
+					<td class="input" id="POINT"></td>
 					<th></th>
 					<th></th>
-					<td id="EXE"></td>
+					<td class="input" id="EXE"></td>
 				</tr>
 			</table>
 			 </div>
