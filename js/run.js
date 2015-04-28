@@ -1,6 +1,7 @@
 $(init);
 var n = 0;
 var liste = [];
+var label = [];
 var write = false;
 var wait = false;
 var input;
@@ -107,7 +108,17 @@ function lire(params){
 		ecran("?");
 	return true;
 }
-
+function saut(params){
+	if(typeof params['label'] != 'undefined'){
+		label[params['label']] = n;
+		return false;
+	}
+	if(typeof params['goto'] != 'undefined'){
+		n = window[label[params['label']]];
+		run_instruction();
+		return false;
+	}
+}
 function instruction(params){
 	switch(params){
 		case "Clrtxt":
