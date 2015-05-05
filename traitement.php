@@ -10,6 +10,7 @@ require "Class/Export.php";
 
 //$data = "AFFICHER Saisir A#LIRE A#WHILE A==1&AFFICHER A&LIRE A&AFFICHER PGM#AFFICHER Sorti";
 $data = "AFFICHER teTE#MENU Test~1~Valeur 1~2~Hello~6~Valeur 10#GOTO 0#LABEL 0#AFFICHER test#AFFICHER test#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisie A#LIRE A#CALCUL C=A+100#AFFICHER C = A+100 = #AFFICHER test#AFFICHER test#AFFICHER test#AFFICHER A";
+$data = "AFFICHER teTE#LABEL A#AFFICHER test12#AFFICHER test#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#GOTO A#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisie A#LIRE A#CALCUL C=A+100#AFFICHER C = A+100 = #AFFICHER test#AFFICHER test#AFFICHER test#AFFICHER A";
 //$data = "AFFICHER Test si#SI A=0:AND B>1~AFFICHER dans le if~AFFICHER Toujours dans le if#SINON AFFICHER HOrs if~AFFICHER Toujours hors if#AFFICHER fin";
 //$data = "AFFICHER Test si#SI A=0:AND B>1~AFFICHER dans le if~AFFICHER Toujours dans le if#AFFICHER fin";
 
@@ -48,25 +49,25 @@ if(empty($codepropre->erreur)){  // Si aucune erreur
 			<div class="console_test">
 				<table class="affichage">
 					<tr>
-						<td class="ligne" id="a1">Une ligne normal FIN!</td>		
+						<td class="ligne" id="a1">Bug !</td>		
 					</tr>
 					<tr>
-						<td class="ligne" id="a2">Une ligne normal FIN!</td>
+						<td class="ligne" id="a2"></td>
 					</tr>
 					<tr>
-						<td class="ligne" id="a3">Une ligne normal FIN!</td>		
+						<td class="ligne" id="a3"></td>		
 					</tr>
 					<tr>
-						<td class="ligne" id="a4">Une ligne normal FIN!</td>		
+						<td class="ligne" id="a4"></td>		
 					</tr>
 					<tr>
-						<td class="ligne" id="a5">Une ligne normal FIN!</td>		
+						<td class="ligne" id="a5"></td>		
 					</tr>
 					<tr>
-						<td class="ligne" id="a6">Une ligne normal FIN!</td>		
+						<td class="ligne" id="a6"></td>		
 					</tr>
 					<tr>
-						<td class="ligne" id="a7">Une ligne normal FIN!</td>		
+						<td class="ligne" id="a7"></td>		
 					</tr>
 				</table>
 			</div>
