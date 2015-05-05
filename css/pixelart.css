@@ -1,0 +1,11 @@
+table{
+	border: 0px;
+}
+td{
+	width: 1px;
+	height: 1px;
+	background-color: #000;
+}
+.active{
+	background-color: #FFF;
+}
