@@ -2,6 +2,13 @@
 session_start();
 require "fonctionsdev.php";
 require "Class/Config.php";
+$sql = Config::sql_connect();
+if(isset($_GET['delete'])){
+	$requete = $sql->prepare("DELETE FROM programmes WHERE id=:id");
+	$requete->execute(array(
+		'id' => $_GET['delete']
+	));
+}
 ?>
 <!DOCTYPE html>
 
@@ -18,8 +25,7 @@ require "Class/Config.php";
 		<div id="a">Mes programmes</div>
 		<div id="b">Tous vos programmes sont sauvegardés ici.<br/>Vous pouvez les modifier, changer le nom ou même le supprimer.</div>
 		<?php
-			$sql = Config::sql_connect();
-			$requete = $sql->prepare("SELECT time FROM programmes WHERE user_id=:id ORDER BY time DESC");
+			$requete = $sql->prepare("SELECT id, time FROM programmes WHERE user_id=:id ORDER BY time DESC");
 			$requete->execute(array(
 				'id' => $_SESSION['id']
 			));
@@ -33,7 +39,7 @@ require "Class/Config.php";
 					<td><input type="text" name="title" id="title" placeholder="Nom du programme ?"></td>
 					<td>Crée le : <?= date("d/m/Y H:i", $v['time']);?></td>
 					<td>Modifier</td>
-					<td>Supprimer</td>
+					<td><a href="?delete=<?= $v['id']?>">Supprimer</a></td>
 				</tr>
 				<?php
 			} ?>
