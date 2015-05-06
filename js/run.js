@@ -57,6 +57,7 @@ function ecran(value){
 function run_instruction(){
 	if(liste.length==0){
 		for (var i = n; i < liste_instruction.length; i++) {
+			console.log(liste_instruction[i]);
 			if(!(write || wait)){
 				fn = window[liste_instruction[i]['fonction']];
 				fn(liste_instruction[i]['params']);
@@ -114,7 +115,7 @@ function saut(params){
 		return false;
 	}
 	if(typeof params['goto'] != 'undefined'){
-		n = window[label[params['label']]];
+		n = label[params['goto']];
 		run_instruction();
 		return false;
 	}
@@ -140,7 +141,7 @@ function instruction(params){
 		break;
 	}
 }
-function calcul(params) { 
+function calcul(params){ 
 	var calcul = params['calcul'];
 	for (var i = 0; i < params['calcul'].length; i++) {
 		if (/[A-Z]/.test(params['calcul'][i])){
@@ -154,22 +155,20 @@ function calcul(params) {
 function calc(calcul) {
   return new Function('return ' + calcul)();
 }
-/*function init_old(){
-//	run_instruction(liste_instruction[0]);
-	$('#next').on('click', function(){
-		run_instruction();
-		return false;
-	});
-	$('#send').on('click', function(){
-		var value = $('#input').val();
-		if($.isNumeric(value)){
-			$("#text-console").append(value + "<br />");
-			window[input] = parseFloat(value);
-			run_instruction();
-		}
-		return false;
-	});
+
+function ifelse(params) {
+  var conditions = params['conditions'][0].split("=");
+  console.log(conditions);
+  if(window[conditions[0]] != conditions[1]){
+  	return false;
+  }else{
+  	console.log("rr");
+  }
+  /*for (var j = 0; j < Things.length; j++) {
+  	Things[j]	
+  };*/
 }
+/*
 
 function run_instruction(){
 	var k;
@@ -221,18 +220,7 @@ function instruction(params){
 	}
 }
 
-function ifelse(params) {
-  var condition = params['if']['condition'].split("=");
-  si = 0;
-  n++;
-  if(window[condition[0]] == parseFloat(condition[1])){
-	listeif = params['if']['instruction'];	
-  }else{
-  	listeif = params['else'];
-  }
-  si_max = listeif.length;
-  run_instruction();
-}
+
 
 function bouclewhile(params) {
   //var condition = params['condition'].split("==");
