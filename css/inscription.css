@@ -1,0 +1,18 @@
+body{
+	color: gray;
+	font-family: Arial black;
+}
+input{
+	font-family: Arial black;
+}
+h1 {
+	color: black;
+}
+div{
+	width: 230px;
+	border: 3px solid black;
+	padding:5px;
+	margin: 30px;
+	display:inline-block; 
+	background: #00FFFF;
+}
