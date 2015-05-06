@@ -1,4 +1,5 @@
 <?php
+session_start();
 /* Appel des fonction de developement */
 require "fonctionsdev.php";
 /* Appel des differantes classe */
@@ -9,10 +10,9 @@ require "Class/Code.php";
 require "Class/Export.php";
 
 //$data = "AFFICHER Saisir A#LIRE A#WHILE A==1&AFFICHER A&LIRE A&AFFICHER PGM#AFFICHER Sorti";
-$data = "AFFICHER teTE#MENU Test~1~Valeur 1~2~Hello~6~Valeur 10#GOTO 0#LABEL 0#AFFICHER test#AFFICHER test#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisie A#LIRE A#CALCUL C=A+100#AFFICHER C = A+100 = #AFFICHER test#AFFICHER test#AFFICHER test#AFFICHER A";
+//$data = "AFFICHER teTE#MENU Test~1~Valeur 1~2~Hello~6~Valeur 10#GOTO 0#LABEL 0#AFFICHER test#AFFICHER test#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisie A#LIRE A#CALCUL C=A+100#AFFICHER C = A+100 = #AFFICHER test#AFFICHER test#AFFICHER test#AFFICHER A";
 $data = "AFFICHER teTE#LABEL A#AFFICHER test12#AFFICHER test#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#GOTO A#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisie A#LIRE A#CALCUL C=A+100#AFFICHER C = A+100 = #AFFICHER test#AFFICHER test#AFFICHER test#AFFICHER A";
-//$data = "AFFICHER Test si#SI A=0:AND B>1~AFFICHER dans le if~AFFICHER Toujours dans le if#SINON AFFICHER HOrs if~AFFICHER Toujours hors if#AFFICHER fin";
-//$data = "AFFICHER Test si#SI A=0:AND B>1~AFFICHER dans le if~AFFICHER Toujours dans le if#AFFICHER fin";
+$data = "LABEL 1#AFFICHER test#LIRE A#SI A=15~AFFICHER A plus 15~AFFICHER A~AFFICHER Fin";
 
 if(isset($_POST['data'])){ // Si une données est envoyée
 	$data = trim($_POST['data']);

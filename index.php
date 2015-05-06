@@ -1,9 +1,11 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="FR" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
 		<link rel="stylesheet" type="text/css" href="css/nav.css" />
+		<link rel="stylesheet" type="text/css" href="css/menu.css">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:700,300,600,800,400' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
@@ -11,6 +13,7 @@
 		<title>Casio</title>
 	</head>
 	<body id="body">
+	<?php include("menu.php"); ?>
 		<section>
 			<?php require('nav.php'); ?>
 			<form method="post" name="form" onsubmit="return validateForm()" id="formulaire" action="traitement.php">
