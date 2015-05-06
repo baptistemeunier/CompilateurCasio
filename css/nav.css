@@ -6,6 +6,9 @@ nav {
 	background-color: #00CED1;
 	box-shadow: 2px 2px 8px #000;
 }
+#navLeft, #navRight, section{
+	margin-top: 20px;
+}
 #navLeft {
 	float: left;
 }
