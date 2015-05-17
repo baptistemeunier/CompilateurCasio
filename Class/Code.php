@@ -39,7 +39,7 @@ class Code{
 	 * @return void
 	 **/
 	function afficher($params){
-		if(isset($params['var'])==1){
+		if(isset($params['var'])){
 			$this->code .= $params['var']."/\n";
 		}else{
 			$this->code .= "\"".$params['text']."\"\n";
@@ -86,11 +86,12 @@ class Code{
 	 * Function calcul
 	 *
 	 * Traduire une instruction calcul en casio
-	 * @param Array $params parametre de la fonction
+	 * @param Array $params paramétre de la fonction
 	 * @return void
 	 **/
 	function calcul($params){
-		$this->code .= $params['calcul'].'->'.$params['var']."\n";
+		// Ajout a la variable code (format basic casio)
+		$this->code .= $params['calcul'].'->'.$params['var']."\n";  
 	}
 	/**
 	 * Function afficher
@@ -110,7 +111,6 @@ class Code{
 	 * @return void
 	 **/
 	function ifelse($params){
-		debug($params);
 		if(isset($params['si'])){
 			$this->code .= "If ";
 			foreach ($params['conditions'] as $value) {

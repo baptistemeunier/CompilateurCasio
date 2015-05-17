@@ -15,8 +15,7 @@ Class Export{
 
 	function __construct($code_recu, $code_casio, $options){
 		if($options['save_db']==true){
-			$table = (isset($options['table']))?$options['table']:"programme";
-			debug('d');
+			$table = (isset($options['table']))?$options['table']:"programmes";
 			$this->savedb($code_recu, $options['titre'], $table);
 		}
 		if($options['save_txt']==true)
@@ -31,8 +30,9 @@ Class Export{
 	 **/
 	function savedb($code, $titre, $table){
 		$sql = Config::sql_connect();
-		$requete = $sql->prepare("INSERT INTO $table(user_id, time, programme) VALUES(:user_id, :time, :programme)");
+		$requete = $sql->prepare("INSERT INTO $table(titre, user_id, time, programme) VALUES(:titre, :user_id, :time, :programme)");
 		$requete->execute(array(
+			'titre' => $titre,
 			'user_id' => 1,
 			'time' => time(),
 			'programme' => $code
