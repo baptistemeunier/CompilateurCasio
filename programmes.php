@@ -25,7 +25,7 @@ if(isset($_GET['delete'])){
 		<div id="a">Mes programmes</div>
 		<div id="b">Tous vos programmes sont sauvegardés ici.<br/>Vous pouvez les modifier, changer le nom ou même le supprimer.</div>
 		<?php
-			$requete = $sql->prepare("SELECT id, time FROM programmes WHERE user_id=:id ORDER BY time DESC");
+			$requete = $sql->prepare("SELECT id, titre, time FROM programmes WHERE user_id=:id ORDER BY time DESC");
 			$requete->execute(array(
 				'id' => $_SESSION['id']
 			));
@@ -36,7 +36,7 @@ if(isset($_GET['delete'])){
 			foreach ($programmes as $v) {
 				?>
 				<tr>
-					<td><input type="text" name="title" id="title" placeholder="Nom du programme ?"></td>
+					<td><?= substr($v['titre'], 0, 25)?></td>
 					<td>Crée le : <?= date("d/m/Y H:i", $v['time']);?></td>
 					<td>Modifier</td>
 					<td><a href="?delete=<?= $v['id']?>">Supprimer</a></td>
