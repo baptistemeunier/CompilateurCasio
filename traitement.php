@@ -6,17 +6,14 @@ require "fonctionsdev.php";
 require "Class/Config.php";
 require "Class/Decode.php";
 require "Class/Code.php";
-//require "Class/Run.php"; Class deprecated depuis la version 0.3.0--alpha
 require "Class/Export.php";
-
-//$data = "AFFICHER Saisir A#LIRE A#WHILE A==1&AFFICHER A&LIRE A&AFFICHER PGM#AFFICHER Sorti";
-//$data = "AFFICHER teTE#MENU Test~1~Valeur 1~2~Hello~6~Valeur 10#GOTO 0#LABEL 0#AFFICHER test#AFFICHER test#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisie A#LIRE A#CALCUL C=A+100#AFFICHER C = A+100 = #AFFICHER test#AFFICHER test#AFFICHER test#AFFICHER A";
-$data = "AFFICHER teTE#LABEL A#AFFICHER test12#AFFICHER test#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#GOTO A#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisi#AFFICHER Saisie A#LIRE A#CALCUL C=A+100#AFFICHER C = A+100 = #AFFICHER test#AFFICHER test#AFFICHER test#AFFICHER A";
-$data = "LABEL 1#AFFICHER test#LIRE A#SI A=15~AFFICHER A plus 15~AFFICHER A~AFFICHER Fin";
+ 
+$data = "LABEL 1#AFFICHER test#LIRE A#SI A=15~AFFICHER A plus 15~AFFICHER A~AFFICHER Fin#SINON~AFFICHER ee#AFFICHER test";
 
 if(isset($_POST['data'])){ // Si une données est envoyée
 	$data = trim($_POST['data']);
 }
+
 $export['titre'] = isset($_POST['title'])?$_POST['title']:md5(sha1(rand()));
 $export['save_db'] = isset($_POST['save_db'])?true:false;
 $export['save_txt'] = isset($_POST['save_txt'])?true:false;
@@ -35,6 +32,7 @@ if(empty($codepropre->erreur)){  // Si aucune erreur
 	<head>
 		<title>Affichage du programme</title>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="css/menu.css">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:700,300,600,800,400' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="css/traitement.css">
 	</head>
@@ -45,6 +43,7 @@ if(empty($codepropre->erreur)){  // Si aucune erreur
 
 	<script type="text/javascript" src="js/run.js"></script>
 	<body>
+		<?php include("menu.php"); ?>
 		<section id="console">
 			<div class="console_test">
 				<table class="affichage">
@@ -100,6 +99,7 @@ if(empty($codepropre->erreur)){  // Si aucune erreur
 			</table>
 			 </div>
 		</section>
+
 		<section id="code">
 			<h2>Votre programme au format CASIO</h2>
 			<?= "<pre>".$code->code."</pre>" // Affichage du code ?>

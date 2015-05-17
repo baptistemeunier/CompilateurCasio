@@ -38,18 +38,23 @@ html{
 	margin-top: 50px;
 	/*width: 500px;
 	height: 380px;*/
-	background-color: #F4A460;
+	background-color: #00CED1;
 	color: #FFF;
 	padding: 20px;
 }
 #save{
+	margin-top: 100px;
 	margin-left: 640px;
 	/*width: 500px;
 	height: 380px;*/
-	background-color: grey;
+	background-color: #00CED1;
 	color: #FFF;
 	padding: 20px;
 }
+#save p {
+	text-align: left;
+}
+
 /*#EXE{
 	margin-left: 475px;
 	/*width: 500px;
@@ -89,12 +94,11 @@ html{
 .console{
 	width: 500px;
 	height: 695px;
-	overflow-y: scroll;
-
 }
 
 h2{
 	text-align: center;
+	color:#000;
 }
 a{
 	text-decoration: none;
