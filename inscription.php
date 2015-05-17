@@ -12,7 +12,10 @@ require "Class/Config.php";
 	</head>
 	<body>
 	<?php include("menu.php"); ?>
+		<div><h1>Inscription<h1></div>
+
 <?php
+$erreur = false;
 if(isset($_POST['pseudo'])){
 	extract($_POST);
 	if($pseudo != ""){
@@ -27,14 +30,16 @@ if(isset($_POST['pseudo'])){
 
 			echo"<h2>Vous étes maintenant inscrit</h2><p>Vous pouvez vous connecter</p>";
 		}else{
-			// Pass incorect
+			echo"<h2>Erreur!</h2><p>Merci d'entrer un mot de passe correct</p>";
+			$erreur = true;
 		}
 	}else{
-		// Pseudo non rentré
+		echo"<h2>Erreur!</h2><p>Merci d'entrer un pseudo</p>";
+		$erreur = true;
 	}
-}else{
+}
+if($erreur==true){
 ?>
-	<div><h1>Inscription<h1></div>
 		<form method="post" action="#">
 			<p>Pseudo:</p>
 			<input type="text" name="pseudo">
