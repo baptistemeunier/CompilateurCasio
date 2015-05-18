@@ -1,5 +1,6 @@
 <?php
 session_start();
+debug($_SESSION);
 /* Appel des fonction de developement */
 require "fonctionsdev.php";
 /* Appel des differantes classe */
