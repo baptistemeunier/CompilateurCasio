@@ -15,11 +15,11 @@ require "Class/Config.php";
 		<div><h1>Inscription<h1></div>
 
 <?php
-$erreur = false;
+$erreur = true;
 if(isset($_POST['pseudo'])){
 	extract($_POST);
 	if($pseudo != ""){
-		if($pass != "" && $pass != $confirmation){
+		if($pass != "" && $pass == $confirmation){
 			$sql = Config::sql_connect();
 			$requete = $sql->prepare("INSERT INTO users(pseudo, pass, inscription) VALUES(:pseudo, :pass, :inscription)");
 			$requete->execute(array(
@@ -27,15 +27,14 @@ if(isset($_POST['pseudo'])){
 				'pass' => $pass,
 				'inscription' => time()
 			));
-
+			$erreur = false;
 			echo"<h2>Vous étes maintenant inscrit</h2><p>Vous pouvez vous connecter</p>";
 		}else{
 			echo"<h2>Erreur!</h2><p>Merci d'entrer un mot de passe correct</p>";
-			$erreur = true;
 		}
 	}else{
 		echo"<h2>Erreur!</h2><p>Merci d'entrer un pseudo</p>";
-		$erreur = true;
+
 	}
 }
 if($erreur==true){
