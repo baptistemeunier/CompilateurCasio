@@ -33,7 +33,7 @@ Class Export{
 		$requete = $sql->prepare("INSERT INTO $table(titre, user_id, time, programme) VALUES(:titre, :user_id, :time, :programme)");
 		$requete->execute(array(
 			'titre' => $titre,
-			'user_id' => 1,
+			'user_id' => $_SESSION['id'],
 			'time' => time(),
 			'programme' => $code
 		));
