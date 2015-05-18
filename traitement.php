@@ -13,7 +13,6 @@ $data = "LABEL 1#AFFICHER test#LIRE A#SI A=15~AFFICHER A plus 15~AFFICHER A~AFFI
 if(isset($_POST['data'])){ // Si une données est envoyée
 	$data = trim($_POST['data']);
 }
-
 $export['titre'] = isset($_POST['title'])?$_POST['title']:md5(sha1(rand()));
 $export['save_db'] = isset($_POST['save_db'])?true:false;
 $export['save_txt'] = isset($_POST['save_txt'])?true:false;
