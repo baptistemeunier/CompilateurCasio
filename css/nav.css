@@ -6,9 +6,6 @@ nav {
 	background-color: #00CED1;
 	box-shadow: 2px 2px 8px #000;
 }
-#navLeft, #navRight, section{
-	margin-top: 20px;
-}
 #navLeft {
 	float: left;
 }
@@ -27,4 +24,11 @@ nav {
 #navLeft button:hover {
 	cursor: pointer;
 	color: #00CED1;
+}
+#navRight div {
+	width: 100%;
+	line-height: 30px;
+	border: 0;
+	background-color: #111;
+	color: #555;
 }
